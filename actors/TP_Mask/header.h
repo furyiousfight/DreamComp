@@ -1,0 +1,13 @@
+extern Lights1 TP_Mask_f3dlite_material_029_layer1_lights;
+extern Lights1 TP_Mask_f3dlite_material_030_layer1_lights;
+extern u8 TP_Mask_tp_text_ia4[];
+extern u8 TP_Mask_tp_meter_2_ia4[];
+extern Vtx TP_Mask_TP_Mask_mesh_vtx_0[4];
+extern Gfx TP_Mask_TP_Mask_mesh_tri_0[];
+extern Vtx TP_Mask_TP_Mask_mesh_vtx_1[4];
+extern Gfx TP_Mask_TP_Mask_mesh_tri_1[];
+extern Gfx mat_TP_Mask_f3dlite_material_029_layer1[];
+extern Gfx mat_revert_TP_Mask_f3dlite_material_029_layer1[];
+extern Gfx mat_TP_Mask_f3dlite_material_030_layer1[];
+extern Gfx mat_revert_TP_Mask_f3dlite_material_030_layer1[];
+extern Gfx TP_Mask_TP_Mask_mesh[];
