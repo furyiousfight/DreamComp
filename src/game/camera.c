@@ -75,6 +75,9 @@ extern checked;
 extern SquishDamageTimer;
 extern rpg_denitializer;
 extern frame13;
+extern BowserCurrHp;
+extern MarioCurrHp;
+extern LuigiCurrHp;
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
 /**
@@ -797,8 +800,9 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
                 }
                 if (rpg_init_timer == 45){
 
-                gMarioState->pos[0] = 0;
-                gMarioState->pos[1] = 2800;
+                gMarioState->pos[0] = 28140;
+                gMarioState->pos[1] = 3097;
+                gMarioState->pos[2] = -31781;
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_STREAMED_RUDE_BUSTER), 0);
                 rpg_initializer = 0;
                 RPG_mode = 1;
@@ -827,6 +831,7 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
                 gMarioState->pos[1] = MarioOWY;
                 gMarioState->pos[2] = MarioOWZ;
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_STREAMED_CITY), 0);
+                reset_camera(gCurrentArea->camera);
                 rpg_denitializer = 0;
                 RPG_mode = 0;
                 rpg_init_timer = 0;
@@ -842,9 +847,9 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
 framedelay++;
     if (RPG_mode == 1){
         if (dodge_section == 0){
-            gMarioState->pos[0] = 0;
-            gMarioState->pos[1] = 2600;
-            gMarioState->pos[2] = -541;
+            gMarioState->pos[0] = 28140;
+            gMarioState->pos[1] = 3097;
+            gMarioState->pos[2] = -31781;
             gMarioState->action = ACT_FORWARD_ROLLOUT;
         }
         if ((((gPlayer1Controller->stickX > 0.5f) && framedelay > 6) && vertical_menu == 0) && dodge_section == 0) {
@@ -1014,7 +1019,7 @@ framedelay++;
                         bowser_action_selected = 1;
                         bowser_action_type = 2;
                         menu_phase =1;
-                        CurrTP -=40;
+                        CurrTP -= 40;
                         current_turn++;
                         vertical_option = 0;
                         menu_phase = 0;
@@ -1046,7 +1051,7 @@ framedelay++;
                         luigi_action_selected = 1;
                         luigi_action_type = 2;
                         menu_phase =1;
-                        CurrTP -=20;
+                        CurrTP -= 20;
                         current_turn++;
                         vertical_option = 0;
                         menu_phase = 0;
@@ -1060,7 +1065,7 @@ framedelay++;
                         luigi_action_selected = 2;
                         luigi_action_type = 2;
                         menu_phase =1;
-                        CurrTP -=35;
+                        CurrTP -= 35;
                         current_turn++;
                         vertical_option = 0;
                         menu_phase = 0;
@@ -1105,27 +1110,40 @@ framedelay++;
                 
 
                 if (current_turn == 2){
-                    if (bowser_action_type == 5){
-                        CurrTP-= 15;
-                }
+                    if (BowserCurrHp > 0){
+                        if (bowser_action_type == 5){
+                            CurrTP -= 15;
+                            bowser_action_type = 0;
+                        }
                         if (bowser_action_type == 2){
                             if(bowser_action_selected == 2){
                             CurrTP += 50;
+                            bowser_action_type = 0;
                             }
                         }
                         if (bowser_action_type == 2){
                             if(bowser_action_selected == 1){
                             CurrTP += 40;
+                            bowser_action_type = 0;
                             }
                         }
+                        current_turn--;
+                    }
+                if ((BowserCurrHp <= 0) && MarioCurrHp > 0){
+                    current_turn = 0;
+                }
             }
-                if ((mario_action_type == 5) && current_turn == 1){
-                CurrTP -=15;
+                if (current_turn == 1){
+                    if (MarioCurrHp > 0){
+                        current_turn = 0;
+                    }
+                    if (mario_action_type == 5){
+                CurrTP -= 15;
+                mario_action_type = 0;
+                    }
                 }
                 framedelay = 0;
-                if (current_turn > 0){
-                current_turn--;
-                }
+
                 play_sound(SOUND_GENERAL_YOSHI_TALK, gGlobalSoundSource);
             }
             
@@ -1388,16 +1406,16 @@ framedelay++;
             
         }
         
-        
-        c->pos[0] = 0;
+ 
+        c->pos[0] = 28140;
         c->pos[1] = 4197;
-        c->pos[2] = 6778;
-        c->focus[0] = 0;
+        c->pos[2] = -24462;
+        c->focus[0] = 28140;
         c->focus[1] = 4197;
-        c->focus[2] = -284;
+        c->focus[2] = -31524;
         if (dodge_section == 1){
 
-        gMarioState->pos[2] = -142;
+        gMarioState->pos[2] = -31382;
             
         //if (spawn_one_battlebox == 0){
         //spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BATTLEBOX,
@@ -11106,7 +11124,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // LLL            | DDD
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // COTMC          | TOTWC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // BOWSER_1       | WMOTR

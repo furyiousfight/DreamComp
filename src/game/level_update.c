@@ -33,6 +33,9 @@
 #include "puppylights.h"
 #include "level_commands.h"
 extern RPG_mode;
+extern LastBonfire;
+extern LastLevel;
+extern LastArea;
 #include "config.h"
 
 // TODO: Make these ifdefs better
@@ -797,6 +800,12 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 break;
 
+            case WARP_OP_BONFIRE:
+                sDelayedWarpTimer = 30;
+                sSourceWarpNodeId = LastBonfire;
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0x00, 0x00, 0x00);
+                break;
+
             case WARP_OP_CREDITS_NEXT:
                 if (gCurrCreditsEntry == &sCreditsSequence[0]) {
                     sDelayedWarpTimer = 60;
@@ -855,6 +864,12 @@ void initiate_delayed_warp(void) {
                     gCurrCreditsEntry = &sCreditsSequence[0];
                     initiate_warp(gCurrCreditsEntry->levelNum, gCurrCreditsEntry->areaIndex,
                                   WARP_NODE_CREDITS_START, WARP_FLAGS_NONE);
+                    break;
+
+                case WARP_OP_BONFIRE:
+                    
+                    initiate_warp(LastLevel, LastArea, LastBonfire, WARP_FLAGS_NONE);
+            
                     break;
 
                 case WARP_OP_CREDITS_NEXT:

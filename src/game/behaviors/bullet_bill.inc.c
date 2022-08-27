@@ -1,11 +1,11 @@
 // bullet_bill.inc.c
-
+extern battle_timer;
 void bhv_white_puff_smoke_init(void) {
     cur_obj_scale(random_float() * 2 + 2.0);
 }
 
 void bhv_bullet_bill_init(void) {
-    o->oBulletBillInitialMoveYaw = o->oMoveAngleYaw;
+    o->oBulletBillInitialMoveYaw = obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX,   0x800);
 }
 
 void bullet_bill_act_0(void) {
@@ -21,12 +21,15 @@ void bullet_bill_act_0(void) {
 
 void bullet_bill_act_1(void) {
     s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
-    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < 1500.0f) {
+
         o->oAction = 2;
     }
-}
+
 
 void bullet_bill_act_2(void) {
+    if (battle_timer == 0){
+    mark_obj_for_deletion(o);
+    }
     if (o->oTimer < 5) {
         o->oForwardVel = 3.0f;
     } else if (o->oTimer < 5) {
@@ -63,13 +66,10 @@ void bullet_bill_act_3(void) {
 
 void bullet_bill_act_4(void) {
     if (o->oTimer == 0) {
-        o->oForwardVel = -30.0f;
-        cur_obj_become_intangible();
+
     }
 
-    o->oFaceAnglePitch += 0x1000;
-    o->oFaceAngleRoll += 0x1000;
-    o->oPosY += 20.0f;
+
 
     if (o->oTimer > 10) {
         o->oAction = 0;

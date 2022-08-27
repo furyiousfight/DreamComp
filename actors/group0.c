@@ -30,3 +30,8 @@
 #include "src/s2d_engine/config.h"
 #include FONT_C_FILE
 #endif
+
+
+
+#include "battle_mario/anims/data.inc.c"
+#include "battle_mario/anims/table.inc.c"

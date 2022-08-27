@@ -73,10 +73,14 @@ extern enemy_2;
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
 struct Area gAreaData[AREA_COUNT];
+extern DeterminationTimer;
+extern WithinBonfireRadius;
 
 struct WarpTransition gWarpTransition;
 u8 TextStar[] = { TEXT_STAR };
 u8 TextMinus[] = { TEXT_MINUS};
+u8 PressB[] = { PRESS_B_DETERMINATION };
+u8 Determined[] = { YOU_FEEL_DETERMINED };
 u8 Test1[] = { TEXT_HUD_TEST_1 };
 u8 Test2[] = { TEXT_HUD_TEST_2 };
 u8 Test3[] = { TEXT_HUD_TEST_3 };
@@ -480,7 +484,23 @@ void render_game(void) {
                       SCREEN_HEIGHT - gBorderHeight);
         
         render_hud();
+        if ((WithinBonfireRadius == 1) && DeterminationTimer == 0) {
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+            print_generic_string(121,39,PressB);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            print_generic_string(120,40,PressB);
+            WithinBonfireRadius=0;
 
+        }
+        if ((WithinBonfireRadius == 1) && DeterminationTimer > 0) {
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+            print_generic_string(81,39,Determined);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+            print_generic_string(80,40,Determined);
+            WithinBonfireRadius=0;
+        }
         if (RPG_mode ==1){
             gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
@@ -532,16 +552,18 @@ void render_game(void) {
         print_generic_string(25,0+menu_pos,Test3);
             }
             if (((checked == 1) && enemy_1 == 1) | ((checked == 2) && enemy_2 == 1)){
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
         print_generic_string(25,26+menu_pos,Goomba);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(25,13+menu_pos,GoombaCheck2);
         print_generic_string(25,0+menu_pos,GoombaCheck3);
             }
             if (((checked == 1) && enemy_1 == 2) | ((checked == 2) && enemy_2 == 2)){
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
-        print_generic_string(25,26+menu_pos,Goomba);
+        print_generic_string(25,26+menu_pos,Koopa);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(25,13+menu_pos,KoopaCheck2);
         print_generic_string(25,0+menu_pos,KoopaCheck3);
             }
@@ -957,18 +979,13 @@ void render_game(void) {
                         }
                         
                         if (bowser_enemy_selected == 1){
-                            if(bowser_action_type == 2){
-                                gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, DamageFadeOut);
+                            if((bowser_action_type == 1) | (bowser_action_type == 2)){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
                                 print_generic_string(191,167,TextMinus);
                                 int_to_str(bowser_tot_damage,ValueText);
                                 print_generic_string(196,167,ValueText);
                             }
-                            if (bowser_action_type == 1){
-                                gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
-                                 print_generic_string(191,167,TextMinus);
-                                int_to_str(bowser_tot_damage,ValueText);
-                                print_generic_string(196,167,ValueText);
-                            }
+                
                         }
                         if (luigi_enemy_selected == 1){
                             if (luigi_action_type == 1){
@@ -977,20 +994,31 @@ void render_game(void) {
                                 int_to_str(luigi_tot_damage,ValueText);
                                 print_generic_string(201,154,ValueText);
                             }
-                        }
+                        } // enemy 2 selected
                         if (mario_enemy_selected == 2){
                             if (mario_action_type == 1){
-                                //enemy_2_health -= mario_base_damage * mario_multiplier;
+                                gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, DamageFadeOut);
+                                print_generic_string(185,180,TextMinus);
+                                int_to_str(mario_tot_damage,ValueText);
+                                print_generic_string(190,180,ValueText);
                             }
                         }
+                        
                         if (bowser_enemy_selected == 2){
-                            if (bowser_action_type == 1){
-                                //enemy_2_health -= bowser_base_damage * bowser_multiplier;
+                            if((bowser_action_type == 1) | (bowser_action_type == 2)){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
+                                print_generic_string(191,167,TextMinus);
+                                int_to_str(bowser_tot_damage,ValueText);
+                                print_generic_string(196,167,ValueText);
                             }
+                
                         }
                         if (luigi_enemy_selected == 2){
                             if (luigi_action_type == 1){
-                                //enemy_2_health -= luigi_base_damage * luigi_multiplier;
+                                gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, DamageFadeOut);
+                                 print_generic_string(196,154,TextMinus);
+                                int_to_str(luigi_tot_damage,ValueText);
+                                print_generic_string(201,154,ValueText);
                             }
                         }
 

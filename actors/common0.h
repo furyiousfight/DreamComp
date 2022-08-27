@@ -231,4 +231,12 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 #include "DRExplosion/header.h"
 
+#include "battle_mario/geo_header.h"
+
+
+#include "battle_mario/anim_header.h"
+
+
+#include "determination/geo_header.h"
+
 #endif

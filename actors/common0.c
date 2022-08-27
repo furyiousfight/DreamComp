@@ -99,3 +99,8 @@ UNUSED static const u64 binid_18 = 18;
 #include "Enemy2_Bars/model.inc.c"
 #include "Explosion/model.inc.c"
 #include "DRExplosion/model.inc.c"
+#include "battle_mario/model.inc.c"
+#include "battle_mario/anims/data.inc.c"
+#include "battle_mario/anims/table.inc.c"
+
+#include "determination/model.inc.c"

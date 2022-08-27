@@ -25,9 +25,21 @@
 #include "skybox.h"
 #include "sound_init.h"
 #include "puppycam2.h"
-
 #include "config.h"
-
+u32 LastBonfire;
+u32 LastLevel;
+u32 LastArea;
+u32 BonfireParam;
+u32 BonfireLevel;
+u32 BonfireArea;
+u32 WithinBonfireRadius;
+s32 DeterminationTimer;
+extern MarioCurrHp;
+extern MarioMaxHp;
+extern BowserCurrHp;
+extern BowserMaxHp;
+extern LuigiCurrHp;
+extern LuigiMaxHp;
 #define TOAD_STAR_1_REQUIREMENT 12
 #define TOAD_STAR_2_REQUIREMENT 25
 #define TOAD_STAR_3_REQUIREMENT 35
@@ -220,6 +232,38 @@ void bhv_toad_message_init(void) {
         obj_mark_for_deletion(o);
     }
 }
+
+void bhv_bonfire_loop(void){
+    struct MarioState *m;
+struct Object *marioObj = m->marioObj;
+
+if (LastBonfire == 0){
+LastBonfire = 0x0A;
+}
+if (LastLevel == 0){
+LastLevel = LEVEL_WF;
+}
+if (LastArea == 0){
+LastArea = 1;
+}
+    if (obj_check_if_collided_with_object(o, gMarioObject)){
+        BonfireParam = GET_BPARAM1(o->oBehParams);
+        BonfireLevel = gCurrLevelNum;
+        WithinBonfireRadius = 1;
+        BonfireArea = gCurrAreaIndex;
+        if ((gPlayer1Controller->buttonPressed & B_BUTTON) && DeterminationTimer == 0){
+            play_sound(SOUND_OBJ_CANNON_RISE, gGlobalSoundSource);
+            MarioCurrHp = MarioMaxHp;
+            BowserCurrHp = BowserMaxHp;
+            LuigiCurrHp = LuigiMaxHp;
+            LastBonfire = BonfireParam;
+            LastLevel = BonfireLevel;
+            LastArea = BonfireArea;
+            DeterminationTimer = 30;
+        }
+    }
+}
+
 
 static void star_door_unlock_spawn_particles(s16 angleOffset) {
     struct Object *sparkleParticle = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);

@@ -1460,12 +1460,14 @@ void update_mario_health(struct MarioState *m) {
                 if (m->hurtCounter > 0) {
                     MarioCurrHp -= 15;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(mario_action_type == 5){
                 if (m->hurtCounter > 0) {
                     MarioCurrHp -= 10;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
         }
@@ -1474,12 +1476,14 @@ void update_mario_health(struct MarioState *m) {
                 if (m->hurtCounter > 0) {
                     BowserCurrHp -= 15;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(bowser_action_type == 5){
                 if (m->hurtCounter > 0) {
                     BowserCurrHp -= 10;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
         }
@@ -1488,12 +1492,14 @@ void update_mario_health(struct MarioState *m) {
                 if (m->hurtCounter > 0) {
                     LuigiCurrHp -= 15;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(luigi_action_type == 5){
                 if (m->hurtCounter > 0) {
                     LuigiCurrHp -= 10;
                     m->hurtCounter--;
+                    play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
         }
@@ -1501,6 +1507,7 @@ void update_mario_health(struct MarioState *m) {
 
         if (m->health > 0x880) m->health = 0x880;
         if (m->health < 0x100) m->health = 0xFF;
+
 
 #ifndef BREATH_METER
         // Play a noise to alert the player when Mario is close to drowning.

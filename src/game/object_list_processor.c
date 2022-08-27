@@ -24,11 +24,13 @@
 #include "profiling.h"
 #include "actors/fountain/header.h"
 #include "levels/bob/header.h"
+#include "levels/wf/header.h"
 #include "game_init.h"
 #include "actors/Battle/header.h"
 #include "actors/Battle_Actions/header.h"
 #include "text_strings.h"
 #include "actors/DRExplosion/header.h"
+#include "actors/determination/geo_header.h"
 extern rpg_initializer;
 s32 PlatformMoves;
 extern u8 explosion_segment[];
@@ -145,6 +147,16 @@ extern SquishDamageTimer;
 extern Battle_Won;
 u32 rpg_denitializer;
 u32 HealthCycleTimer;
+extern u8 determination_segment[];
+u32 frame14;
+u32 third_speed14;
+extern LastLevel;
+extern LastArea;
+extern LastBonfire;
+extern DeterminationTimer;
+u32 death_timer;
+u32 death_timer_init;
+u32 attack_rotation;
 /**
  * Flags controlling what debug info is displayed.
  */
@@ -385,9 +397,29 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
+    if (current_turn != 4){
+    attack_rotation++;
+    }
+    if (attack_rotation > 9) {
+        attack_rotation = 0;
+    }
+    print_text_fmt_int(10, 10, "attack_rotation = %d", attack_rotation);
+    /*
+    if (battle_timer == 200) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 2587, -31402, 0, 0, 0);
+    }
+    if (battle_timer == 195) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27398, 2804, -31402, 0, 0, 0);
+    } */
+
     battle_timer--;
+    
     if (battle_timer < 0) {
         battle_timer = 0;
+    }
+    DeterminationTimer--;
+    if (DeterminationTimer < 0) {
+        DeterminationTimer = 0;
     }
     MarioMaxHp = 90;
 
@@ -397,6 +429,37 @@ if (HealthCycleTimer > 2) {
     HealthCycleTimer = 0;
 }
 }
+/*
+print_text_fmt_int(0,0,"LastLevel: %d", LastLevel);
+print_text_fmt_int(0,15,"LastArea: %d", LastArea);
+print_text_fmt_int(0,30,"LastBonfire: %d", LastBonfire);
+
+print_text_fmt_int(0, 80, "gCurrLevelNum: %d", gCurrLevelNum);
+print_text_fmt_int(0, 95, "gCurrAreaIndex: %d", gCurrAreaIndex);
+*/
+//print_text_fmt_int(0, 110, "death_timer: %d", death_timer);
+if (death_timer_init == 1){
+death_timer++;
+}
+if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
+    if(death_timer_init == 0){
+        death_timer_init = 1;
+    }
+        if (death_timer_init == 1){
+        level_trigger_warp(gMarioState, WARP_OP_BONFIRE);
+        if (death_timer == 29) {
+        MarioCurrHp = MarioMaxHp;
+        BowserCurrHp = BowserMaxHp;
+        LuigiCurrHp = LuigiMaxHp;
+            RPG_mode = 0;
+            death_timer_init = 0;
+            death_timer = 0;
+        }
+        }
+    }
+
+
+
 //print_text_fmt_int(0, 180, "HealthCycleTimer: %d", HealthCycleTimer);
     if (CurrTP < 9){
         TPOffset = 6;
@@ -430,7 +493,7 @@ if (HealthCycleTimer > 2) {
         BowserHealthTextOffset = 0;
     }
 
-    if (MarioCurrHp <= 0) {
+    if (MarioCurrHp < 0) {
         MarioCurrHp = 0;
     }
         if(MarioCurrHp > MarioMaxHp){
@@ -440,7 +503,7 @@ if (HealthCycleTimer > 2) {
     BowserMaxHp = 110;
 
    
-    if (BowserCurrHp <= 0) {
+    if (BowserCurrHp < 0) {
         BowserCurrHp = 0;
     }
         if(BowserCurrHp > BowserMaxHp){
@@ -449,7 +512,7 @@ if (HealthCycleTimer > 2) {
     LuigiMaxHp = 70;
 
  
-    if (LuigiCurrHp <= 0) {
+    if (LuigiCurrHp < 0) {
         LuigiCurrHp = 0;
     }
         if(LuigiCurrHp > LuigiMaxHp){
@@ -458,7 +521,7 @@ if (HealthCycleTimer > 2) {
      if (current_turn == -1){
         current_turn = 0;
     }
-    if ((current_turn == 0) && Battle_Won == 0){
+    if ((current_turn != 4) && Battle_Won == 0){
         battle_pos = 0;
         attack_phase = 0;
     }
@@ -473,7 +536,7 @@ if (HealthCycleTimer > 2) {
         current_turn = 1;
         battle_timer = 0;
     }
-    if ((current_turn == 0) && Battle_Won == 1){
+    if ((current_turn != 4) && Battle_Won == 1){
         battle_pos = -107;
         attack_phase = 0;
         rpg_denitializer = 1;
@@ -497,7 +560,7 @@ if (HealthCycleTimer > 2) {
     if ((current_turn > 3) && init_timer == 0){
         current_turn == 0;
         dodge_section = 1;
-        battle_timer = 150;
+        battle_timer = 210;
         init_timer = 1;
         vertical_menu = 0;
         vertical_option = 1;
@@ -514,6 +577,15 @@ if (HealthCycleTimer > 2) {
         
     } 
     if ((battle_timer == 0) && dodge_section == 1){
+        mario_enemy_selected = 0;
+        mario_action_selected = 0;
+        mario_action_type = 0;
+        bowser_enemy_selected = 0;
+        bowser_action_selected = 0;
+        bowser_action_type = 0;
+        luigi_enemy_selected = 0;
+        luigi_action_selected = 0;
+        luigi_action_type = 0;
         dodge_section = 0;
         current_turn = 0;
     }
@@ -590,6 +662,27 @@ if (HealthCycleTimer > 2) {
         battle_option = 0;
     }
 
+if (MarioCurrHp <= 0 && current_turn == 0){
+battle_option = 0;
+                menu_phase = 0;
+        mario_action_type = 5;
+        current_turn++;
+    
+}
+if (BowserCurrHp <= 0 && current_turn == 1){
+battle_option = 0;
+                menu_phase = 0;
+                bowser_action_type=5;
+        current_turn++;
+    
+}
+if (LuigiCurrHp <= 0 && current_turn == 2){
+               battle_option = 0;
+                menu_phase = 0;
+        luigi_action_type=5;
+        current_turn++;
+    
+}
 
 
 /*
@@ -598,7 +691,7 @@ print_text_fmt_int(20,40, "Y %d", MarioOWY);
 print_text_fmt_int(20,60, "Z %d", MarioOWZ);
 */
 
-    u8 *texture_location_in_ram2 = segmented_to_virtual(&bob_dl_lit_up_path_base_rgba16);
+    u8 *texture_location_in_ram2 = segmented_to_virtual(&wf_dl_lit_up_path_base_rgba16);
 
     dma_read(texture_location_in_ram2,(frame2*2048)+lightpath_segment,(frame2*2048)+lightpath_segment+2048);
         third_speed2++;
@@ -610,7 +703,7 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
-    u8 *texture_location_in_ram3 = segmented_to_virtual(&bob_dl_BUY_base_rgba16);
+    u8 *texture_location_in_ram3 = segmented_to_virtual(&wf_dl_BUY_base_rgba16);
 
 
     dma_read(texture_location_in_ram3,(frame3*4800)+buy1_segment,(frame3*4800)+buy1_segment+4800);
@@ -623,7 +716,7 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
-    u8 *texture_location_in_ram4 = segmented_to_virtual(&bob_dl_AD_base_rgba16);
+    u8 *texture_location_in_ram4 = segmented_to_virtual(&wf_dl_AD_base_rgba16);
 
 
     dma_read(texture_location_in_ram4,(frame4*4800)+ad_segment,(frame4*4800)+ad_segment+4800);
@@ -636,7 +729,7 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
-           u8 *texture_location_in_ram5 = segmented_to_virtual(&bob_dl_BUY2_base_rgba16);
+           u8 *texture_location_in_ram5 = segmented_to_virtual(&wf_dl_BUY2_base_rgba16);
 
 
     dma_read(texture_location_in_ram5,(frame5*4800)+buy2_segment,(frame5*4800)+buy2_segment+4800);
@@ -649,7 +742,7 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
-           u8 *texture_location_in_ram6 = segmented_to_virtual(&bob_dl_LOOK_base_rgba16);
+           u8 *texture_location_in_ram6 = segmented_to_virtual(&wf_dl_LOOK_base_rgba16);
 
 
     dma_read(texture_location_in_ram6,(frame6*4800)+look_segment,(frame6*4800)+look_segment+4800);
@@ -662,7 +755,7 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
-           u8 *texture_location_in_ram7 = segmented_to_virtual(&bob_dl_DEALS_base_rgba16);
+           u8 *texture_location_in_ram7 = segmented_to_virtual(&wf_dl_DEALS_base_rgba16);
 
 
     dma_read(texture_location_in_ram7,(frame7*4800)+deals_segment,(frame7*4800)+deals_segment+4800);
@@ -744,6 +837,19 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         frame13 = 16;
         }
         }
+
+             u8 *texture_location_in_ram14 = segmented_to_virtual(&determination_determination_base_rgba16);
+
+
+    dma_read(texture_location_in_ram14,(frame14*800)+determination_segment,(frame14*800)+determination_segment+800);
+third_speed14++;
+        if (third_speed14 >= 3){
+            frame14++;
+            third_speed14 = 0;
+            if (frame14 > 5) {
+        frame14 = 0;
+        }
+        }
   
         //if (gPlayer1Controller->buttonPressed & R_TRIG){
         //RPG_mode = 0;
@@ -755,11 +861,15 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
 
 
     if (gPlayer1Controller->buttonPressed & L_TRIG){
-
-        enemy_1_health--;
-        enemy_2_health--;
-
+        BowserCurrHp = 0;
     }
+    if (gPlayer1Controller->buttonPressed & R_TRIG){
+        MarioCurrHp = 0;
+    }
+    if (gPlayer1Controller->buttonPressed & Z_TRIG){
+        LuigiCurrHp = 0;
+    }
+    
 //print_text_fmt_int(10,0, "enemy_2_health: %d", enemy_2_health);
 //print_text_fmt_int(10,15, "enemy_1_health: %d", enemy_1_health);
 //print_text_fmt_int(10,30, "rpg_initializer: %d", rpg_initializer);
@@ -798,6 +908,8 @@ if (current_turn == 4){
     if (DamageFadeOut <= 0){
         DamageFadeOut = 0;
     }
+} else {
+    DamageFadeOut = 255;
 }
 if (current_turn == 4 && attack_phase == 0){
 if (mario_enemy_selected == 1){
@@ -805,9 +917,27 @@ if (mario_enemy_selected == 1){
         enemy_1_health -= mario_tot_damage;
     }
 }
-if (bowser_enemy_selected == 1){
-    if (bowser_action_type == 1){
+
+if (bowser_action_type == 1){
+    if (bowser_enemy_selected == 1){
         enemy_1_health -= bowser_tot_damage;
+    }
+    if (bowser_enemy_selected == 2){
+        enemy_2_health -= bowser_tot_damage;
+    }
+}
+if (bowser_action_type == 2){
+    if (bowser_action_selected == 1){
+        if (bowser_enemy_selected == 1){
+            enemy_1_health -= bowser_tot_damage;
+    }
+        if (bowser_enemy_selected == 2){
+            enemy_2_health -= bowser_tot_damage;
+        }
+    }
+    if (bowser_action_selected == 2){
+    enemy_1_health -= bowser_tot_damage;
+    enemy_2_health -= bowser_tot_damage;
     }
 }
 if (luigi_enemy_selected == 1){
@@ -820,42 +950,17 @@ if (mario_enemy_selected == 2){
         enemy_2_health -= mario_tot_damage;
     }
 }
-if (bowser_enemy_selected == 2){
-    if (bowser_action_type == 1){
-        enemy_2_health -= bowser_tot_damage;
-    }
-}
+
 if (luigi_enemy_selected == 2){
     if (luigi_action_type == 1){
         enemy_2_health -= luigi_tot_damage;
     }
 }
 
-if (bowser_enemy_selected == 1){
-    if (bowser_action_type == 2){
-        if(bowser_action_selected == 1){
 
-        enemy_1_health -= bowser_tot_damage;
-    }
-}
-}
-if (bowser_enemy_selected == 2){
-    if (bowser_action_type == 2){
-        if(bowser_action_selected == 1){
 
-        enemy_2_health -= bowser_tot_damage;
-    }
-}
-}
-if ((bowser_enemy_selected == 1) | bowser_enemy_selected == 2){
-    if (bowser_action_type == 2){
-        if(bowser_action_selected == 2){
-        enemy_1_health -= bowser_tot_damage;
-        enemy_2_health -= bowser_tot_damage;
 
-    }
-}
-}
+
 if (luigi_enemy_selected == 1){
     if (luigi_action_type == 2){
         if (luigi_action_selected == 1){

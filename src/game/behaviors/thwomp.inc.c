@@ -1,11 +1,11 @@
 // thwomp.inc.c
 
+
 void grindel_thwomp_act_on_ground(void) {
-    if (o->oTimer == 0) {
-        o->oThwompRandomTimer = random_float() * 10.0f + 20.0f;
-    }
-    if (o->oTimer > o->oThwompRandomTimer) {
-        o->oAction = GRINDEL_THWOMP_ACT_RISING;
+    o->oPosZ += 70.0f;
+
+    if (o->oPosZ >= 3400){
+        o->oPosZ -= 3200;
     }
 }
 
@@ -48,10 +48,6 @@ void grindel_thwomp_act_rising(void) {
 }
 
 ObjActionFunc sGrindelThwompActions[] = {
-    grindel_thwomp_act_rising,
-    grindel_thwomp_act_floating,
-    grindel_thwomp_act_falling,
-    grindel_thwomp_act_land,
     grindel_thwomp_act_on_ground
 };
 

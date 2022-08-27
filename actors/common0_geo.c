@@ -30,3 +30,6 @@
 
 #include "twoser/geo.inc.c"
 #include "battlebox/geo.inc.c"
+#include "battle_mario/geo.inc.c"
+
+#include "determination/geo.inc.c"

@@ -6122,7 +6122,7 @@ BEGIN(OBJ_LIST_DEFAULT),
     SET_FLOAT(oDrawingDistance, 32000),
     ANIMATE(0),
 
-    SCALE(/*Unused*/ 0, /*Field*/ 400),
+    SCALE(/*Unused*/ 0, /*Field*/ 300),
     CALL_NATIVE(bhv_toad_message_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_battle_bowser),
@@ -6132,11 +6132,11 @@ BEGIN(OBJ_LIST_DEFAULT),
 const BehaviorScript bhvBattleMario[] = {
 BEGIN(OBJ_LIST_DEFAULT),
 
-    LOAD_ANIMATIONS(oAnimations, SEGMENT_MARIO_ANIMS),
+    LOAD_ANIMATIONS(oAnimations, battle_mario_anims),
     SET_FLOAT(oDrawingDistance, 32000),
-    ANIMATE(MARIO_ANIM_BACKFLIP),
+    ANIMATE(1),
 
-    SCALE(/*Unused*/ 0, /*Field*/ 700),
+    SCALE(/*Unused*/ 0, /*Field*/ 125),
     CALL_NATIVE(bhv_toad_message_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_battle_mario),
@@ -6150,3 +6150,65 @@ const BehaviorScript bhvBattleBox[] = {
         CALL_NATIVE(bhv_battle_box),
     END_LOOP(),
 };
+
+const BehaviorScript bhvThwompCar[] = {
+ BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    SCALE(/*Unused*/ 0, /*Field*/ 140),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_thwomp_car_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_thwomp_car),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFieldBowser[] = {
+
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_INT(oDamageOrCoinValue, 3),
+        DROP_TO_FLOOR(),
+SCALE(/*Unused*/ 0, /*Field*/ 70),
+    SET_INT(oIntangibleTimer, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_field_bowser),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFieldLuigi[] = {
+
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_INT(oDamageOrCoinValue, 3),
+        DROP_TO_FLOOR(),
+SCALE(/*Unused*/ 0, /*Field*/ 70),
+    SET_INT(oIntangibleTimer, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_field_luigi),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBonfire[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE )),
+
+    SET_INTERACT_TYPE(INTERACT_NONE),
+    SET_HITBOX(/*Radius*/ 220, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bonfire_loop),
+    END_LOOP(),
+};
+

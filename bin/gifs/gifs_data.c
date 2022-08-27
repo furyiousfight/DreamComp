@@ -58,3 +58,7 @@ ALIGNED8 const u8 spare_segment[] = {
 ALIGNED8 const u8 item_segment[] = {
 #include "actors/amp/item.rgba16.inc.c" 
 };
+
+ALIGNED8 const u8 determination_segment[] = {
+#include "actors/amp/determination.rgba16.inc.c" 
+};

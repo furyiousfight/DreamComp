@@ -624,7 +624,7 @@ if (menu_phase == 1){
         TargetY = 100;
     
     }
-create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 0);
+create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 50);
 gSPDisplayList(gDisplayListHead++, &Target_Target_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
@@ -641,17 +641,17 @@ if (menu_phase == 3){
         TargetY = 120;
     }
 
-create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 0);
+create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 50);
 gSPDisplayList(gDisplayListHead++, &Target_Target_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 if (enemy_1_init_explosion == 1){
-create_dl_translation_matrix(G_MTX_PUSH, 220, 162, 0);
+create_dl_translation_matrix(G_MTX_PUSH, 220, 162, 50);
 gSPDisplayList(gDisplayListHead++, &DRExplosion_DRExplosion_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 if (enemy_2_init_explosion == 1){
-create_dl_translation_matrix(G_MTX_PUSH, 267, 100, 0);
+create_dl_translation_matrix(G_MTX_PUSH, 267, 100, 50);
 gSPDisplayList(gDisplayListHead++, &DRExplosion_DRExplosion_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }

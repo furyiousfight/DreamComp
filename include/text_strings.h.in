@@ -86,6 +86,9 @@
 #define TEXT_PAUSE _("PAUSE") // Pause text, Castle Courses
 #define TEXT_HUD_CONGRATULATIONS _("CONGRATULATIONS") // Course Complete Text, Bowser Courses
 
+#define PRESS_B_DETERMINATION _("Press B to interact.") // Used in Bowser Courses
+#define YOU_FEEL_DETERMINED _("You are filled with determination!") // Used in Bowser Courses
+
 #define TEXT_HUD_TEST_1 _("Hey check it out. Cool battle text")
 #define TEXT_HUD_TEST_2 _("This is the second line")
 #define TEXT_HUD_TEST_3 _("And there's even more text here at the bottom")

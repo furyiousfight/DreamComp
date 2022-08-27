@@ -545,5 +545,10 @@ extern const BehaviorScript bhvBattleKoopa[];
 extern const BehaviorScript bhvBattleBowser[];
 extern const BehaviorScript bhvBattleMario[];
 extern const BehaviorScript bhvBattleBox[];
+extern const BehaviorScript bhvThwompCar[];
+extern const BehaviorScript bhvFieldBowser[];
+extern const BehaviorScript bhvFieldLuigi[];
+extern const BehaviorScript bhvBonfire[];
+
 
 #endif // BEHAVIOR_DATA_H
