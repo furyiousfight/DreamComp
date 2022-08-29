@@ -558,6 +558,7 @@ void bhv_thwomp_car_init(void);
 void bhv_thwomp_car(void);
 void bhv_field_bowser(void);
 void bhv_field_luigi(void);
+void bhv_intro_bowser(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

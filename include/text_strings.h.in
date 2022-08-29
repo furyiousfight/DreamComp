@@ -117,7 +117,7 @@
 
 // names text
 #define TEXT_HUD_MARIO _("Mario")
-#define TEXT_HUD_LUIGI _("Luigi")
+#define TEXT_HUD_LUIGI _("Gulii")
 #define TEXT_HUD_BOWSER _("Bowser")
 
 // magic text

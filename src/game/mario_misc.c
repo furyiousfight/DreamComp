@@ -26,6 +26,7 @@
 #include "sound_init.h"
 #include "puppycam2.h"
 #include "config.h"
+#include "types.h"
 u32 LastBonfire;
 u32 LastLevel;
 u32 LastArea;
@@ -40,6 +41,7 @@ extern BowserCurrHp;
 extern BowserMaxHp;
 extern LuigiCurrHp;
 extern LuigiMaxHp;
+extern intro_increment;
 #define TOAD_STAR_1_REQUIREMENT 12
 #define TOAD_STAR_2_REQUIREMENT 25
 #define TOAD_STAR_3_REQUIREMENT 35
@@ -131,14 +133,14 @@ static void toad_message_opaque(void) {
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->oInteractStatus = INT_STATUS_NONE;
             o->oToadMessageState = TOAD_MESSAGE_TALKING;
-            play_toads_jingle();
+
         }
     }
 }
 
 static void toad_message_talking(void) {
-    if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_DOWN,
-        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, o->oToadMessageDialogId)) {
+    if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_FRONT,
+        DIALOG_FLAG_NONE, CUTSCENE_DIALOG, o->oToadMessageDialogId)) {
         o->oToadMessageRecentlyTalked = TRUE;
         o->oToadMessageState = TOAD_MESSAGE_FADING;
         switch (o->oToadMessageDialogId) {
@@ -171,6 +173,17 @@ static void toad_message_fading(void) {
 }
 
 void bhv_toad_message_loop(void) {
+
+
+    if ((get_dialog_id() == DIALOG_000) && gMarioState->action == ACT_READING_NPC_DIALOG) { 
+
+
+        disable_time_stop_including_mario();
+        gMarioState->action = ACT_READING_AUTOMATIC_DIALOG;
+
+        spawn_object_abs_with_rot(gMarioObject,0, MODEL_TWOSER, bhvFieldBowser, -452, 100, -787, 0, 0, 0);
+        mark_obj_for_deletion(o);
+        } 
     if (o->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         o->oInteractionSubtype = INT_STATUS_NONE;
         switch (o->oToadMessageState) {

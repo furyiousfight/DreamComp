@@ -157,6 +157,8 @@ extern DeterminationTimer;
 u32 death_timer;
 u32 death_timer_init;
 u32 attack_rotation;
+extern intro_increment;
+u32 intro_timer;
 /**
  * Flags controlling what debug info is displayed.
  */
@@ -403,6 +405,7 @@ void bhv_mario_update(void) {
     if (attack_rotation > 9) {
         attack_rotation = 0;
     }
+
     //print_text_fmt_int(10, 10, "attack_rotation = %d", attack_rotation);
 /*
     if (battle_timer == 200) {

@@ -549,6 +549,7 @@ extern const BehaviorScript bhvThwompCar[];
 extern const BehaviorScript bhvFieldBowser[];
 extern const BehaviorScript bhvFieldLuigi[];
 extern const BehaviorScript bhvBonfire[];
+extern const BehaviorScript bhvIntroBowser[];
 
 
 #endif // BEHAVIOR_DATA_H

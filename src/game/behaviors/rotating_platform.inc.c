@@ -2,6 +2,8 @@
 extern battle_timer;
 #include "levels/wf/header.h"
 #include "levels/wdw/header.h"
+
+
 extern RPG_mode;
 extern enemy_1;
 extern enemy_2;
@@ -17,6 +19,8 @@ extern luigi_action_type;
 extern MarioCurrHp;
 extern BowserCurrHp;
 extern LuigiCurrHp;
+u32 intro_increment;
+extern intro_timer;
 #include "actors/battle_mario/anim_header.h"
 struct WFRotatingPlatformData {
     s16 unused;
@@ -220,4 +224,23 @@ cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x600);
 }
 
 
+void bhv_intro_bowser(void){
+if ((gPlayer1Controller->buttonPressed & A_BUTTON) | (gPlayer1Controller->buttonPressed & B_BUTTON)){
+    
+        if (intro_increment == 0) {
+        obj_set_model(gCurrentObject, MODEL_NONE);
+        spawn_object_abs_with_rot(gMarioObject,0, MODEL_TWOSER, bhvFieldBowser, -452, 100, -787, 0, 0, 0);
+        intro_increment = 1;
+        } 
+        
 
+
+    }
+            cur_obj_init_animation(1);
+            if (intro_timer > 3) {
+        gMarioState->action = ACT_READING_AUTOMATIC_DIALOG;
+        mark_obj_for_deletion(o);
+        create_dialog_box(DIALOG_000);
+        }
+        }
+    
