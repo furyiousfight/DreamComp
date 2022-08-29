@@ -31,8 +31,8 @@ static struct ObjectHitbox sThwompHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 72,
-    /* height:            */ 50,
+    /* radius:            */ 160,
+    /* height:            */ 330,
     /* hurtboxRadius:     */ 42,
     /* hurtboxHeight:     */ 40,
 };
@@ -152,15 +152,15 @@ void bhv_thwomp_car_init(void){
 
 void bhv_thwomp_car(void){
     if (o->oBehParams2ndByte == 0){
-        if (o->oPosZ >= 3400){
-        o->oPosZ -= 3200;
+        if (o->oPosZ >= 3103){
+        o->oPosZ -= 4903;
 
     }
         o->oPosZ += 70.0f;
     }
     if (o->oBehParams2ndByte == 1){
-        if (o->oPosZ <= 200){
-        o->oPosZ += 3200;
+        if (o->oPosZ <= -1800){
+        o->oPosZ += 4903;
 
     }
         o->oPosZ -= 70.0f;
@@ -189,10 +189,12 @@ if (RPG_mode == 0){
 cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x600);
         if (o->oDistanceToMario > 300.0f) {
             cur_obj_set_vel_from_mario_vel(10,1);
+            cur_obj_init_animation(2);
                 } else {
         o->oForwardVel -=3;
         if (o->oForwardVel <= 0){
             o->oForwardVel = 0;
+            cur_obj_init_animation(1);
         }
     
 
@@ -205,11 +207,13 @@ if (RPG_mode == 0){
 cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x600);
         if (o->oDistanceToMario > 600.0f) {
             cur_obj_set_vel_from_mario_vel(10,1);
+            cur_obj_init_animation(2);
             
     } else {
         o->oForwardVel -=3;
         if (o->oForwardVel <= 0){
             o->oForwardVel = 0;
+            cur_obj_init_animation(1);
         }
     }
 }

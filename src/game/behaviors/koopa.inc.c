@@ -12,7 +12,7 @@
  * uses a hardcoded soft hitbox.
  */
 static struct ObjectHitbox sKoopaHitbox = {
-    /* interactType:      */ INTERACT_KOOPA,
+    /* interactType:      */ INTERACT_SHOCK,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
@@ -102,7 +102,7 @@ static void koopa_play_footstep_sound(s8 animFrame1, s8 animFrame2) {
  * running away.
  */
 static s32 koopa_check_run_from_mario(void) {
-    if (o->oKoopaDistanceToMario < 300.0f
+    if (o->oKoopaDistanceToMario < 600.0f
         && abs_angle_diff(o->oKoopaAngleToMario, o->oMoveAngleYaw) < 0x3000) {
         o->oAction = KOOPA_SHELLED_ACT_RUN_FROM_MARIO;
         return TRUE;
@@ -200,17 +200,14 @@ static void koopa_shelled_act_run_from_mario(void) {
     koopa_play_footstep_sound(0, 11);
 
     // If far from home, run toward it
-    if (o->oDistanceToMario >= 25000.0f) {
-        o->oAngleToMario += 0x8000;
-        o->oDistanceToMario = 0.0f;
-    }
+
 
     if (o->oTimer > 30 && o->oDistanceToMario > 800.0f) {
         if (obj_forward_vel_approach(0.0f, 1.0f)) {
             o->oAction = KOOPA_SHELLED_ACT_STOPPED;
         }
     } else {
-        cur_obj_rotate_yaw_toward(o->oAngleToMario + 0x8000, 0x400);
+        cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
         obj_forward_vel_approach(17.0f, 1.0f);
     }
 }

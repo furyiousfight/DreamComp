@@ -1,4 +1,4 @@
-void scroll_wf_dl_Cube_mesh_layer_4_vtx_5() {
+void scroll_wf_dl_Cube_mesh_layer_4_vtx_0() {
 	int i = 0;
 	int count = 4;
 	int width = 32 * 0x20;
@@ -8,7 +8,7 @@ void scroll_wf_dl_Cube_mesh_layer_4_vtx_5() {
 	int deltaX;
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(wf_dl_Cube_mesh_layer_4_vtx_5);
+	Vtx *vertices = segmented_to_virtual(wf_dl_Cube_mesh_layer_4_vtx_0);
 
 	deltaX = (int)(1.0 * 0x20) % width;
 	deltaY = (int)(-1.0 * 0x20) % height;
@@ -27,7 +27,7 @@ void scroll_wf_dl_Cube_mesh_layer_4_vtx_5() {
 	currentX += deltaX;	currentY += deltaY;
 }
 
-void scroll_wf_dl_Cube_mesh_layer_4_vtx_6() {
+void scroll_wf_dl_Cube_mesh_layer_4_vtx_1() {
 	int i = 0;
 	int count = 4;
 	int width = 32 * 0x20;
@@ -37,7 +37,7 @@ void scroll_wf_dl_Cube_mesh_layer_4_vtx_6() {
 	int deltaX;
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(wf_dl_Cube_mesh_layer_4_vtx_6);
+	Vtx *vertices = segmented_to_virtual(wf_dl_Cube_mesh_layer_4_vtx_1);
 
 	deltaX = (int)(-1.0 * 0x20) % width;
 	deltaY = (int)(1.0 * 0x20) % height;
@@ -57,6 +57,6 @@ void scroll_wf_dl_Cube_mesh_layer_4_vtx_6() {
 }
 
 void scroll_wf() {
-	scroll_wf_dl_Cube_mesh_layer_4_vtx_5();
-	scroll_wf_dl_Cube_mesh_layer_4_vtx_6();
+	scroll_wf_dl_Cube_mesh_layer_4_vtx_0();
+	scroll_wf_dl_Cube_mesh_layer_4_vtx_1();
 }

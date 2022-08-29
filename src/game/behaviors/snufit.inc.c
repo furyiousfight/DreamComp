@@ -1,4 +1,4 @@
-
+extern battle_timer;
 /**
  * Behavior file for bhvSnufit and bhvSnufitBalls.
  * Snufits are present in HMC and CotMC, and are the fly guy
@@ -69,13 +69,13 @@ void snufit_act_idle(void) {
     // if the game would not have already crashed.
     s32 marioDist = (s32)(o->oDistanceToMario / 10.0f);
 
-    if (o->oTimer > marioDist && o->oDistanceToMario < 800.0f) {
+    if (o->oTimer > 1) {
 
         // Controls an alternating scaling factor in a cos.
         o->oSnufitBodyScalePeriod
-            = approach_s16_symmetric(o->oSnufitBodyScalePeriod, 0, 1500);
+            = approach_s16_symmetric(o->oSnufitBodyScalePeriod, 0, 3000);
         o->oSnufitBodyBaseScale
-            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 15);
+            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 600);
 
         if ((s16) o->oSnufitBodyScalePeriod == 0 && o->oSnufitBodyBaseScale == 600) {
             o->oAction = SNUFIT_ACT_SHOOT;
@@ -91,18 +91,18 @@ void snufit_act_idle(void) {
  */
 void snufit_act_shoot(void) {
     o->oSnufitBodyScalePeriod
-        = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 3000);
+        = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 16000);
     o->oSnufitBodyBaseScale
-        = approach_s16_symmetric(o->oSnufitBodyBaseScale, 167, 20);
+        = approach_s16_symmetric(o->oSnufitBodyBaseScale, 167, 167);
 
     if ((u16) o->oSnufitBodyScalePeriod == 0x8000 && o->oSnufitBodyBaseScale == 167) {
         o->oAction = SNUFIT_ACT_IDLE;
-    } else if (o->oSnufitBullets < 3 && o->oTimer >= 3) {
+    } else if (o->oSnufitBullets < 1 && o->oTimer >= 1) {
         o->oSnufitBullets++;
         cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
         spawn_object_relative(0, 0, -20, 40, o, MODEL_BOWLING_BALL, bhvSnufitBalls);
         o->oSnufitRecoil = -30;
-        o->oTimer = 0;
+        o->oTimer = 1;
     }
 }
 
@@ -111,13 +111,16 @@ void snufit_act_shoot(void) {
  * and the action brain of the object.
  */
 void bhv_snufit_loop(void) {
+    if (battle_timer == 0){
+        mark_obj_for_deletion(o);
+    }
     // Only update if Mario is in the current room.
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
         o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
         // Face Mario if he is within range.
-        if (o->oDistanceToMario < 800.0f) {
-            obj_turn_pitch_toward_mario(120.0f, 2000);
+        if (o->oDistanceToMario < 8000.0f) {
+            obj_turn_pitch_toward_mario(120.0f, 8000);
 
             if ((s16) o->oMoveAnglePitch > 0x2000) {
                 o->oMoveAnglePitch = 0x2000;
@@ -125,7 +128,7 @@ void bhv_snufit_loop(void) {
                 o->oMoveAnglePitch = -0x2000;
             }
 
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 2000);
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 8000);
         } else {
             obj_move_pitch_approach(0, 0x200);
             o->oMoveAngleYaw += 200;
@@ -145,9 +148,7 @@ void bhv_snufit_loop(void) {
         // Snufit orbits in a circular motion depending on an internal timer
         // and vertically off the global timer. The vertical position can be
         // manipulated using pauses since it uses the global timer.
-        o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
-        o->oPosY = o->oHomeY + 8.0f * coss(4000 * gGlobalTimer);
-        o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
+
 
         o->oSnufitBodyScale
             = (s16)(o->oSnufitBodyBaseScale + 666
@@ -161,7 +162,7 @@ void bhv_snufit_loop(void) {
         }
 
         cur_obj_scale(o->oSnufitScale);
-        obj_check_attacks(&sSnufitHitbox, o->oAction);
+
     }
 }
 

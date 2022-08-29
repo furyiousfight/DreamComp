@@ -30,21 +30,13 @@ void bullet_bill_act_2(void) {
     if (battle_timer == 0){
     mark_obj_for_deletion(o);
     }
-    if (o->oTimer < 5) {
-        o->oForwardVel = 3.0f;
-    } else if (o->oTimer < 5) {
-        if (o->oTimer % 2) {
-            o->oForwardVel = 3.0f;
-        } else {
-            o->oForwardVel = -3.0f;
-        }
-    } else {
+    
         if (o->oTimer > 5) {
             cur_obj_update_floor_and_walls();
         }
 
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-        o->oForwardVel = 50.0f;
+        o->oForwardVel = 40.0f;
 
 
 
@@ -58,7 +50,7 @@ void bullet_bill_act_2(void) {
             spawn_mist_particles();
         }
     }
-}
+
 
 void bullet_bill_act_3(void) {
     o->oAction = 0;
@@ -87,6 +79,6 @@ ObjActionFunc sBulletBillActions[] = {
 void bhv_bullet_bill_loop(void) {
     cur_obj_call_action_function(sBulletBillActions);
     if (cur_obj_check_interacted()) {
-        o->oAction = 4;
+        o->oAction = 2;
     }
 }

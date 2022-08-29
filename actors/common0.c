@@ -104,3 +104,5 @@ UNUSED static const u64 binid_18 = 18;
 #include "battle_mario/anims/table.inc.c"
 
 #include "determination/model.inc.c"
+
+#include "snufit/model.inc.c"

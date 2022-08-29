@@ -235,7 +235,21 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 
 #include "battle_mario/anim_header.h"
-
+// snufit
+extern const GeoLayout snufit_geo[];
+extern const Gfx snufit_seg6_dl_060091E0[];
+extern const Gfx snufit_seg6_dl_06009278[];
+extern const Gfx snufit_seg6_dl_060092F0[];
+extern const Gfx snufit_seg6_dl_06009498[];
+extern const Gfx snufit_seg6_dl_06009668[];
+extern const Gfx snufit_seg6_dl_06009700[];
+extern const Gfx snufit_seg6_dl_06009748[];
+extern const Gfx snufit_seg6_dl_060098A0[];
+extern const Gfx snufit_seg6_dl_06009938[];
+extern const Gfx snufit_seg6_dl_060099D8[];
+extern const Gfx snufit_seg6_dl_06009A10[];
+extern const Gfx snufit_seg6_dl_06009B18[];
+extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "determination/geo_header.h"
 

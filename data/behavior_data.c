@@ -6120,7 +6120,7 @@ BEGIN(OBJ_LIST_DEFAULT),
 
     LOAD_ANIMATIONS(oAnimations, twoser_anims),
     SET_FLOAT(oDrawingDistance, 32000),
-    ANIMATE(0),
+    ANIMATE(1),
 
     SCALE(/*Unused*/ 0, /*Field*/ 300),
     CALL_NATIVE(bhv_toad_message_init),
@@ -6157,6 +6157,7 @@ const BehaviorScript bhvThwompCar[] = {
     DROP_TO_FLOOR(),
     SCALE(/*Unused*/ 0, /*Field*/ 140),
     SET_HOME(),
+
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_thwomp_car_init),
     BEGIN_LOOP(),
@@ -6169,10 +6170,12 @@ const BehaviorScript bhvFieldBowser[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
+    LOAD_ANIMATIONS(oAnimations, twoser_anims),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    ANIMATE(0),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_INT(oDamageOrCoinValue, 3),
-        DROP_TO_FLOOR(),
+
 SCALE(/*Unused*/ 0, /*Field*/ 70),
     SET_INT(oIntangibleTimer, 0),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
@@ -6185,8 +6188,10 @@ SCALE(/*Unused*/ 0, /*Field*/ 70),
 const BehaviorScript bhvFieldLuigi[] = {
 
     BEGIN(OBJ_LIST_GENACTOR),
+    LOAD_ANIMATIONS(oAnimations, twoser_anims),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
+    ANIMATE(0),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_INT(oDamageOrCoinValue, 3),

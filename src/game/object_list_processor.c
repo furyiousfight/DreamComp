@@ -403,15 +403,34 @@ void bhv_mario_update(void) {
     if (attack_rotation > 9) {
         attack_rotation = 0;
     }
-    print_text_fmt_int(10, 10, "attack_rotation = %d", attack_rotation);
-    /*
+    //print_text_fmt_int(10, 10, "attack_rotation = %d", attack_rotation);
+/*
     if (battle_timer == 200) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 2587, -31402, 0, 0, 0);
     }
     if (battle_timer == 195) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27398, 2804, -31402, 0, 0, 0);
-    } */
-
+    }
+*/
+/*
+    if (battle_timer == 195) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 3791, -31382, 0, 0, 0);
+		
+		spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2750, -31382, 0, 0, 0);
+		spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 3598, -31382, 0, 0, 0);
+		
+		spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2558, -31382, 0, 0, 0);
+    }
+    if (battle_timer == 155) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+    }
+    */
+    if (battle_timer == 195) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28141, 2851, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28685, 3727, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 27622, 3733, -31382, 0, 0, 0);
+    }
     battle_timer--;
     
     if (battle_timer < 0) {
@@ -859,7 +878,7 @@ third_speed14++;
         //CurrTP++;
         //}
 
-
+/*
     if (gPlayer1Controller->buttonPressed & L_TRIG){
         BowserCurrHp = 0;
     }
@@ -869,6 +888,7 @@ third_speed14++;
     if (gPlayer1Controller->buttonPressed & Z_TRIG){
         LuigiCurrHp = 0;
     }
+    */
     
 //print_text_fmt_int(10,0, "enemy_2_health: %d", enemy_2_health);
 //print_text_fmt_int(10,15, "enemy_1_health: %d", enemy_1_health);

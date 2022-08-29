@@ -33,3 +33,5 @@
 #include "battle_mario/geo.inc.c"
 
 #include "determination/geo.inc.c"
+
+#include "snufit/geo.inc.c"

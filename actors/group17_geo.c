@@ -10,6 +10,6 @@
 #include "mr_i_eyeball/geo.inc.c"
 #include "mr_i_iris/geo.inc.c"
 #include "swoop/geo.inc.c"
-#include "snufit/geo.inc.c"
+
 #include "dorrie/geo.inc.c"
 #include "scuttlebug/geo.inc.c"
