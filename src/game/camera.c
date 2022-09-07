@@ -78,6 +78,21 @@ extern frame13;
 extern BowserCurrHp;
 extern MarioCurrHp;
 extern LuigiCurrHp;
+extern intro_increment;
+extern BowserXPos;
+extern BowserYPos;
+extern BowserZPos;
+u32 play_once;
+extern fawful_battle;
+extern fawful_cutscene;
+extern FawfulX;
+extern FawfulY;
+extern FawfulZ;
+u32 camera_init;
+extern fawful_cutscene;
+extern fawful_cutscene_timer;
+extern fawful_battle_won;
+extern start_dialog;
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
 /**
@@ -744,6 +759,78 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
 #ifdef FAST_VERTICAL_CAMERA_MOVEMENT
     f32 approachRate = 20.0f;
 #endif
+//print_text_fmt_int (100, 100, "BowserXPos: %d", BowserXPos);
+//print_text_fmt_int(100, 120, "BowserZPos: %d", BowserZPos);
+if (gCurrLevelNum == LEVEL_WF && start_dialog == 0){
+    gMarioState->action = ACT_READING_AUTOMATIC_DIALOG;
+    create_dialog_box(DIALOG_018);
+    start_dialog = 1;
+}
+if(gMarioState->floor->type == SURFACE_DIALOG){
+if (camera_init == 0){
+    reset_camera(gCurrentArea->camera);
+    camera_init = 1;
+}
+c->pos[0] = gMarioState->pos[0] + 450;
+c->pos[1] = 1928;
+c->pos[2] = 3129;
+c->focus[0] = gMarioState->pos[0] + 450;
+c->focus[1] = 100;
+c->focus[2] = 1955;
+/*
+print_text_fmt_int(0, 100, "ypos %d",c->pos[1]);
+print_text_fmt_int(0, 120, "yfocus %d",c->focus[1]);
+print_text_fmt_int(0, 140, "xpos %d",c->pos[0]);
+print_text_fmt_int(0, 160, "xfocus %d",c->focus[0]);
+print_text_fmt_int(0, 180, "zpos %d",c->pos[2]);
+print_text_fmt_int(0, 200, "zfocus %d",c->focus[2]);
+*/
+
+}
+//print_text_fmt_int(0, 220, "camera_init: %d", camera_init);
+if(gMarioState->floor->type != SURFACE_DIALOG){
+    camera_init = 0;
+}
+    if (fawful_cutscene > 0){
+
+        gMarioState->pos[1] = gMarioState->floorHeight;
+        if(RPG_mode == 1){
+            fawful_cutscene = 0;
+            fawful_cutscene_timer = 0;
+        }
+        
+    
+    } 
+
+
+    if (intro_increment > 0 && intro_increment < 4) {
+        
+        c->pos[0] = -452;
+        c->pos[1] = 574;
+        c->pos[2] = -172;
+        c->focus[0] = BowserXPos;
+        c->focus[1] = 100;
+        c->focus[2] = -787;
+        gMarioState->action = ACT_UNINITIALIZED;
+    } if (intro_increment >= 4) {
+        if (gMarioState->action == ACT_UNINITIALIZED) {
+            gMarioState->action = ACT_IDLE;
+        }
+    }
+    if (gCurrLevelNum == LEVEL_BOB && gCurrAreaIndex == 3 && intro_increment == 0 && play_once == 0) {
+    play_sound(SOUND_OBJ_UKIKI_CHATTER_LONG, gGlobalSoundSource);
+    play_once = 1;
+    }
+    if (gCurrLevelNum == LEVEL_BOB && gCurrAreaIndex == 4){
+        play_once = 0;
+    }
+    if (gCurrLevelNum == LEVEL_BOB && gCurrAreaIndex == 5 && play_once == 0) {
+    play_sound(SOUND_OBJ_UKIKI_CHATTER_LONG, gGlobalSoundSource);
+    fadeout_background_music(SEQ_STREAMED_HOME, 200);
+    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_STREAMED_CREEPYDOOR), 0);
+
+    play_once = 1;
+    }
         if (current_turn == 4){
             checked = 0;
         }
@@ -751,6 +838,7 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
             if ((enemy_1_health <= 0) && enemy_1_dead == 0){
                 enemy_1_init_explosion = 1;
                 play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+                
                 frame13 = 0;
                 enemy_1_dead = 1;
             }
@@ -790,28 +878,35 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
                 if (rpg_init_timer == 45){
                 gTimeStopState &= ~TIME_STOP_ENABLED;
                 }
-                if (enemy_1 == 1){
-                enemy_1_health = 80;
-                enemy_1_max_health = 80;
-                }
-                if (enemy_1 == 1){
-                enemy_1_health = 80;
-                enemy_1_max_health = 80;
-                }
+                
                 if (rpg_init_timer == 45){
 
                 gMarioState->pos[0] = 28140;
                 gMarioState->pos[1] = 3097;
                 gMarioState->pos[2] = -31781;
+                if (fawful_battle == 0){
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_STREAMED_RUDE_BUSTER), 0);
+                }
+                if (fawful_battle == 1){
+                play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_STREAMED_BIGSHOT), 0);
+                }
+                
                 rpg_initializer = 0;
                 RPG_mode = 1;
                 rpg_init_timer = 0;
+
                 }
         }
+        //print_text_fmt_int(0, 50, "rpg_denitializer: %d", rpg_denitializer);
         if (rpg_denitializer >= 1){
                 if (rpg_init_timer == 1){
+                    if (fawful_battle == 0){
                 fadeout_background_music(SEQ_STREAMED_RUDE_BUSTER, 300);
+                    }
+                        if (fawful_battle == 1){
+                            fadeout_background_music(SEQ_STREAMED_BIGSHOT, 300);
+            fawful_battle_won = 1;
+        }
 
 
                 }
@@ -836,6 +931,8 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
                 RPG_mode = 0;
                 rpg_init_timer = 0;
                 Battle_Won = 0;
+                fawful_cutscene = 0;
+                fawful_cutscene_timer = 0;
 
                 }
         }
@@ -875,7 +972,13 @@ framedelay++;
                 vertical_option = 1;
                 menu_phase = 1;
                 framedelay = 0;
+                if (fawful_battle == 0){
                 vertical_option_max = 2;
+                }
+                if (fawful_battle == 1){
+                vertical_option_max = 1;
+                }
+                
                 play_sound(SOUND_GENERAL_LEVEL_SELECT_CHANGE, gGlobalSoundSource);
                 }
                 if (battle_option == 1) {
@@ -885,13 +988,28 @@ framedelay++;
                 menu_phase = 1;
                 framedelay = 0;
                 if(current_turn == 0){
-                    vertical_option_max = 2;
+                                    if (fawful_battle == 0){
+                vertical_option_max = 2;
+                }
+                if (fawful_battle == 1){
+                vertical_option_max = 1;
+                }
                 }
                 if(current_turn == 1){
-                    vertical_option_max = 2;
+                                    if (fawful_battle == 0){
+                vertical_option_max = 2;
+                }
+                if (fawful_battle == 1){
+                vertical_option_max = 1;
+                }
                 }
                 if(current_turn == 2){
-                    vertical_option_max = 2;
+                                    if (fawful_battle == 0){
+                vertical_option_max = 2;
+                }
+                if (fawful_battle == 1){
+                vertical_option_max = 1;
+                }
                 }
 
                 play_sound(SOUND_GENERAL_LEVEL_SELECT_CHANGE, gGlobalSoundSource);
@@ -910,7 +1028,12 @@ framedelay++;
                 vertical_option = 1;
                 menu_phase = 1; // phase 1 enemy select
                 framedelay = 0;
+                                if (fawful_battle == 0){
                 vertical_option_max = 2;
+                }
+                if (fawful_battle == 1){
+                vertical_option_max = 2;
+                }
                 play_sound(SOUND_GENERAL_LEVEL_SELECT_CHANGE, gGlobalSoundSource);
                     }
                 }
@@ -999,7 +1122,12 @@ framedelay++;
                         mario_action_type = 2;
 
                         if (mario_enemy_selected == 1){
+                            if (fawful_battle == 0){
                             enemy_1_mercy += 75;
+                            }
+                            if (fawful_battle == 1){
+                            enemy_1_mercy += 10;
+                            }
                         }
                         if (mario_enemy_selected == 2){
                             enemy_2_mercy += 75;
@@ -1107,7 +1235,15 @@ framedelay++;
                 framedelay = 0;
             }
             if ((vertical_menu == 0) && framedelay > 6){
-                
+                if (current_turn == 1){
+                    if (MarioCurrHp > 0){
+                        current_turn = 0;
+                    }
+                    if (mario_action_type == 5){
+                CurrTP -= 15;
+                mario_action_type = 0;
+                    }
+                }
 
                 if (current_turn == 2){
                     if (BowserCurrHp > 0){
@@ -1127,21 +1263,11 @@ framedelay++;
                             bowser_action_type = 0;
                             }
                         }
-                        current_turn--;
+                        current_turn = 1;
                     }
-                if ((BowserCurrHp <= 0) && MarioCurrHp > 0){
-                    current_turn = 0;
-                }
+
             }
-                if (current_turn == 1){
-                    if (MarioCurrHp > 0){
-                        current_turn = 0;
-                    }
-                    if (mario_action_type == 5){
-                CurrTP -= 15;
-                mario_action_type = 0;
-                    }
-                }
+                
                 framedelay = 0;
 
                 play_sound(SOUND_GENERAL_YOSHI_TALK, gGlobalSoundSource);
@@ -1271,6 +1397,7 @@ framedelay++;
                         }
                     } //enemy_selected, 1 is enemy 1, 2 is enemy 2, 3 is mario, 4 is bowser, 5 is luigi
                     if (current_turn == 1){
+                        vertical_option_max = 2;
                     if((vertical_option == 1) && enemy_1_health > 0){
                         framedelay = 0;
                             bowser_enemy_selected = 1;
@@ -1291,6 +1418,7 @@ framedelay++;
                         }
                     }
                     if (current_turn == 2){
+                        vertical_option_max = 2;
                     if((vertical_option == 1) && enemy_1_health > 0){
                             framedelay = 0;
                             luigi_enemy_selected = 1;
@@ -6640,9 +6768,7 @@ struct CameraTrigger sCamCotMC[] = {
  * The CCM triggers are used to set the flag that says when Mario is in the slide shortcut.
  */
 struct CameraTrigger sCamCCM[] = {
-    { 2, cam_ccm_enter_slide_shortcut, -4846, 2061, 27, 1229, 1342, 396, 0 },
-    { 2, cam_ccm_leave_slide_shortcut, -6412, -3917, -6246, 307, 185, 132, 0 },
-    NULL_TRIGGER
+	NULL_TRIGGER
 };
 
 /**
@@ -6778,6 +6904,9 @@ struct CameraTrigger sCamWF[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamCastleGrounds[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamDDD[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
@@ -8237,7 +8366,7 @@ void cutscene_dance_closeup(struct Camera *c) {
         cutscene_event(cutscene_dance_closeup_zoom, c, 33, 33);
         cutscene_event(cutscene_dance_closeup_shake_fov, c, 40, 40);
     }
-    set_handheld_shake(HAND_CAM_SHAKE_CUTSCENE);
+
 }
 
 /**
@@ -11117,9 +11246,9 @@ u8 sDanceCutsceneIndexTable[][4] = {
 u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR

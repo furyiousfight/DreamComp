@@ -7,6 +7,7 @@
 
 #define MODEL_MARIO                            0x01        // mario_geo
 #define MODEL_LUIGI                            0x02        // unused
+#define MODEL_NORMAL_MARIO                   0xEC        // mario_wing_cap_geo
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
@@ -548,6 +549,15 @@
 #define MODEL_BATTLEBOX                  0xE5        // battle_box_geo
 #define MODEL_BATTLE_MARIO               0xE6        // battle_mario_geo
 #define MODEL_DETERMINATION              0xE7        // determination_geo
+#define MODEL_BIGTOAD                     0xE9        // bowser2_geo
+#define MODEL_GLOBALTOAD                0xEA        // butterfly_geo
+#define MODEL_LIBRARYDOOR                     0xEB        // bowser2_geo
+#define MODEL_THWOMP_CAR                     0xED        // bowser2_geo
+#define MODEL_WHOMP_CAR                     0xEE        // bowser2_geo
+#define MODEL_BOUNDS                     0xEF        // bowser2_geo
+#define MODEL_DARK_TWOSER                     0xF0        // bowser2_geo
+#define MODEL_DUMPSTER                     0xF1        // bowser2_geo
+#define MODEL_BATTLE_DARK_TWOSER                    0xF2        // bowser2_geo
 #ifdef IA8_30FPS_COINS
 #define MODEL_SILVER_COIN                 0xE2        // silver_coin_geo
 #define MODEL_SILVER_COIN_NO_SHADOW       0xE3        // silver_coin_no_shadow_geo

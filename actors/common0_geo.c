@@ -35,3 +35,6 @@
 #include "determination/geo.inc.c"
 
 #include "snufit/geo.inc.c"
+#include "bigtoad/geo.inc.c"
+#include "dark_twoser/geo.inc.c"
+#include "battle_dark_twoser/geo.inc.c"

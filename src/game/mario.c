@@ -1455,6 +1455,7 @@ void update_mario_health(struct MarioState *m) {
             m->health += 0x40;
             m->healCounter--;
         }
+
         if (HealthCycleTimer == 0){
             if(mario_action_type != 5){
                 if (m->hurtCounter > 0) {
@@ -1503,6 +1504,7 @@ void update_mario_health(struct MarioState *m) {
                 }
             }
         }
+    
     }
 
         if (m->health > 0x880) m->health = 0x880;

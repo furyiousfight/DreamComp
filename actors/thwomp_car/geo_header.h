@@ -1,0 +1,17 @@
+extern const GeoLayout thwomp_car_geo[];
+extern Lights1 thwomp_car_f3dlite_material_001_lights;
+extern Lights1 thwomp_car_f3dlite_material_lights;
+extern u8 thwomp_car_car_ci4[];
+extern u8 thwomp_car_car_ci4_pal_rgba16[];
+extern u8 thwomp_car_thwomp_ci4[];
+extern u8 thwomp_car_thwomp_ci4_pal_rgba16[];
+extern Vtx thwomp_car_DrawCall_204_mesh_layer_1_vtx_0[55];
+extern Gfx thwomp_car_DrawCall_204_mesh_layer_1_tri_0[];
+extern Vtx thwomp_car_DrawCall_204_mesh_layer_1_vtx_1[57];
+extern Gfx thwomp_car_DrawCall_204_mesh_layer_1_tri_1[];
+extern Gfx mat_thwomp_car_f3dlite_material_001[];
+extern Gfx mat_revert_thwomp_car_f3dlite_material_001[];
+extern Gfx mat_thwomp_car_f3dlite_material[];
+extern Gfx mat_revert_thwomp_car_f3dlite_material[];
+extern Gfx thwomp_car_DrawCall_204_mesh_layer_1[];
+extern Gfx thwomp_car_material_revert_render_settings[];

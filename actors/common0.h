@@ -195,7 +195,7 @@ extern const GeoLayout test_platform_geo[];
 extern const Gfx unknown_seg8_dl_08026260[];
 extern const Collision unknown_seg8_collision_080262F8[];
 
-#include "fountain/header.h"
+
 
 #include "Battle/header.h"
 
@@ -253,4 +253,18 @@ extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "determination/geo_header.h"
 
+#include "bigtoad/geo_header.h"
+
+
+#include "bigtoad/anim_header.h"
+#include "fountain/header.h"
+
+#include "dark_twoser/geo_header.h"
+
+
+#include "dark_twoser/anim_header.h"
+#include "battle_dark_twoser/geo_header.h"
+
+
+#include "battle_dark_twoser/anim_header.h"
 #endif

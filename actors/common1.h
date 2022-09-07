@@ -294,4 +294,26 @@ extern const Gfx wooden_signpost_seg3_dl_0302DCD0[];
 extern const Gfx wooden_signpost_seg3_dl_0302DD08[];
 extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 
+
+
+#include "globaltoad/geo_header.h"
+
+
+#include "globaltoad/anim_header.h"
+#include "librarydoor/geo_header.h"
+
+#include "librarydoor/collision_header.h"
+
+#include "thwomp_car/geo_header.h"
+
+#include "whomp_car/geo_header.h"
+
+#include "bounds/geo_header.h"
+
+#include "dumpster/geo_header.h"
+
+
+#include "dumpster/anim_header.h"
+#include "dumpster/collision_header.h"
+
 #endif

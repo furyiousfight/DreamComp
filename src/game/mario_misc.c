@@ -42,9 +42,9 @@ extern BowserMaxHp;
 extern LuigiCurrHp;
 extern LuigiMaxHp;
 extern intro_increment;
-#define TOAD_STAR_1_REQUIREMENT 12
-#define TOAD_STAR_2_REQUIREMENT 25
-#define TOAD_STAR_3_REQUIREMENT 35
+#define TOAD_STAR_1_REQUIREMENT 0
+#define TOAD_STAR_2_REQUIREMENT 0
+#define TOAD_STAR_3_REQUIREMENT 0
 
 #define TOAD_STAR_1_DIALOG DIALOG_082
 #define TOAD_STAR_2_DIALOG DIALOG_076
@@ -143,18 +143,22 @@ static void toad_message_talking(void) {
         DIALOG_FLAG_NONE, CUTSCENE_DIALOG, o->oToadMessageDialogId)) {
         o->oToadMessageRecentlyTalked = TRUE;
         o->oToadMessageState = TOAD_MESSAGE_FADING;
+        
         switch (o->oToadMessageDialogId) {
             case TOAD_STAR_1_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_1_DIALOG_AFTER;
-                bhv_spawn_star_no_level_exit(STAR_BP_ACT_1);
+                spawn_object_abs_with_rot(gMarioObject,0, MODEL_TWOSER, bhvIntroWalkBowser, -651, 100, -764, 0, 0, 0);
+        obj_mark_for_deletion(o);
                 break;
             case TOAD_STAR_2_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_2_DIALOG_AFTER;
-                bhv_spawn_star_no_level_exit(STAR_BP_ACT_2);
+                spawn_object_abs_with_rot(gMarioObject,0, MODEL_DARK_TWOSER, bhvFieldBowser, -322, 52, 5225, 0, 131, 0);
+        obj_mark_for_deletion(o);
                 break;
             case TOAD_STAR_3_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_3_DIALOG_AFTER;
-                bhv_spawn_star_no_level_exit(STAR_BP_ACT_3);
+                spawn_object_abs_with_rot(gMarioObject,0, MODEL_DARK_TWOSER, bhvFieldLuigi, 489, 52, 6832, 0, -90, 0);
+        obj_mark_for_deletion(o);
                 break;
         }
     }
@@ -173,17 +177,9 @@ static void toad_message_fading(void) {
 }
 
 void bhv_toad_message_loop(void) {
-
-
-    if ((get_dialog_id() == DIALOG_000) && gMarioState->action == ACT_READING_NPC_DIALOG) { 
-
-
-        disable_time_stop_including_mario();
-        gMarioState->action = ACT_READING_AUTOMATIC_DIALOG;
-
-        spawn_object_abs_with_rot(gMarioObject,0, MODEL_TWOSER, bhvFieldBowser, -452, 100, -787, 0, 0, 0);
-        mark_obj_for_deletion(o);
-        } 
+    if ((intro_increment == 4) && GET_BPARAM3(o->oBehParams) == 1) {    
+            mark_obj_for_deletion(o);
+}
     if (o->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         o->oInteractionSubtype = INT_STATUS_NONE;
         switch (o->oToadMessageState) {
@@ -243,7 +239,7 @@ void bhv_toad_message_init(void) {
         o->oOpacity = 81;
     } else {
         obj_mark_for_deletion(o);
-    }
+    } 
 }
 
 void bhv_bonfire_loop(void){
@@ -254,7 +250,7 @@ if (LastBonfire == 0){
 LastBonfire = 0x0A;
 }
 if (LastLevel == 0){
-LastLevel = LEVEL_WF;
+LastLevel = LEVEL_CCM;
 }
 if (LastArea == 0){
 LastArea = 1;

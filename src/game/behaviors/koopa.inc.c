@@ -1,4 +1,6 @@
-
+extern battle_id;
+extern rpg_init_timer;
+extern rpg_initializer;
 /**
  * Behavior for bhvKoopa and bhvKoopaRaceEndpoint.
  * bhvKoopa includes normal, unshelled, tiny, and Koopa the Quick.
@@ -16,7 +18,7 @@ static struct ObjectHitbox sKoopaHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
-    /* numLootCoins:      */ -1,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 60,
     /* height:            */ 40,
     /* hurtboxRadius:     */ 40,
@@ -69,6 +71,7 @@ static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
  * Initialization function.
  */
 void bhv_koopa_init(void) {
+    
     if ((o->oKoopaMovementType = o->oBehParams2ndByte) == KOOPA_BP_TINY) {
         // Tiny koopa in THI
         o->oKoopaMovementType = KOOPA_BP_NORMAL;
@@ -82,6 +85,7 @@ void bhv_koopa_init(void) {
         o->oKoopaAgility = 4.0f;
         cur_obj_scale(3.0f);
     } else {
+
         o->oKoopaAgility = 1.0f;
     }
 }
@@ -102,6 +106,7 @@ static void koopa_play_footstep_sound(s8 animFrame1, s8 animFrame2) {
  * running away.
  */
 static s32 koopa_check_run_from_mario(void) {
+    
     if (o->oKoopaDistanceToMario < 600.0f
         && abs_angle_diff(o->oKoopaAngleToMario, o->oMoveAngleYaw) < 0x3000) {
         o->oAction = KOOPA_SHELLED_ACT_RUN_FROM_MARIO;
@@ -139,6 +144,7 @@ static void koopa_walk_start(void) {
  * Walk until oKoopaCountdown hits zero, then increment sub-action.
  */
 static void koopa_walk(void) {
+    
     cur_obj_init_animation_with_sound(KOOPA_ANIM_WALK);
     koopa_play_footstep_sound(2, 17);
 
@@ -250,6 +256,7 @@ static void koopa_shelled_act_lying(void) {
  * Lose shell and enter lying action.
  */
 void shelled_koopa_attack_handler(s32 attackType) {
+    
     if (o->header.gfx.scale[0] > 0.8f) {
         cur_obj_play_sound_2(SOUND_OBJ_KOOPA_DAMAGE);
 
@@ -281,7 +288,21 @@ void shelled_koopa_attack_handler(s32 attackType) {
 static void koopa_shelled_update(void) {
     cur_obj_update_floor_and_walls();
     obj_update_blinking(&o->oKoopaBlinkTimer, 20, 50, 4);
+        if (obj_check_if_collided_with_object(o, gMarioObject)){
+        battle_id = GET_BPARAM1(o->oBehParams);
+        
+        rpg_initializer = 1;
+        
 
+        
+    }
+                if (GET_BPARAM1(o->oBehParams) == battle_id){
+                if (rpg_init_timer >= 15){
+
+        obj_mark_for_deletion(o);
+        obj_die_if_health_non_positive();
+            }
+        }
     switch (o->oAction) {
         case KOOPA_SHELLED_ACT_STOPPED:
             koopa_shelled_act_stopped();

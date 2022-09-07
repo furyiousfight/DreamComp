@@ -87,3 +87,17 @@ UNUSED static const u64 binid_21 = 21;
 
 #include "tree/model.inc.c"
 UNUSED static const u64 binid_22 = 22;
+
+
+#include "globaltoad/model.inc.c"
+#include "globaltoad/anims/data.inc.c"
+#include "globaltoad/anims/table.inc.c"
+#include "librarydoor/model.inc.c"
+#include "librarydoor/collision.inc.c"
+#include "thwomp_car/model.inc.c"
+#include "whomp_car/model.inc.c"
+#include "bounds/model.inc.c"
+#include "dumpster/model.inc.c"
+#include "dumpster/anims/data.inc.c"
+#include "dumpster/anims/table.inc.c"
+#include "dumpster/collision.inc.c"

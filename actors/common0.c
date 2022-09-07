@@ -80,7 +80,7 @@ UNUSED static const u64 binid_17 = 17;
 #include "koopa_shell/model.inc.c"
 UNUSED static const u64 binid_18 = 18;
 
-#include "fountain/model.inc.c"
+
 #include "Battle/model.inc.c"
 #include "Mario_Health/model.inc.c"
 #include "Bowser_Health/model.inc.c"
@@ -106,3 +106,14 @@ UNUSED static const u64 binid_18 = 18;
 #include "determination/model.inc.c"
 
 #include "snufit/model.inc.c"
+
+#include "bigtoad/model.inc.c"
+#include "bigtoad/anims/data.inc.c"
+#include "bigtoad/anims/table.inc.c"
+#include "fountain/model.inc.c"
+#include "dark_twoser/model.inc.c"
+#include "dark_twoser/anims/data.inc.c"
+#include "dark_twoser/anims/table.inc.c"
+#include "battle_dark_twoser/model.inc.c"
+#include "battle_dark_twoser/anims/data.inc.c"
+#include "battle_dark_twoser/anims/table.inc.c"

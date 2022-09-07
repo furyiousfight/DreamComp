@@ -25,3 +25,10 @@
 #include "white_particle/geo.inc.c"
 #include "wooden_signpost/geo.inc.c"
 #include "tree/geo.inc.c"
+
+#include "globaltoad/geo.inc.c"
+#include "librarydoor/geo.inc.c"
+#include "thwomp_car/geo.inc.c"
+#include "whomp_car/geo.inc.c"
+#include "bounds/geo.inc.c"
+#include "dumpster/geo.inc.c"

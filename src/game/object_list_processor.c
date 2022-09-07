@@ -159,6 +159,12 @@ u32 death_timer_init;
 u32 attack_rotation;
 extern intro_increment;
 u32 intro_timer;
+extern fawful_cutscene_timer;
+extern fawful_cutscene;
+u32 fawful_battle;
+extern fawful_battle_won;
+u32 start_dialog;
+
 /**
  * Flags controlling what debug info is displayed.
  */
@@ -399,23 +405,37 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
+
+    if (gCurrLevelNum == LEVEL_CCM){
+        intro_increment = 0;
+    }
+    if(fawful_cutscene > 0){
+    fawful_cutscene_timer++;
+    }
+    //print_text_fmt_int(0, 0, "fawful_cutscene_timer: %d", fawful_cutscene_timer);
+    //print_text_fmt_int(0, 16, "fawful_cutscene: %d", fawful_cutscene);
+    
     if (current_turn != 4){
     attack_rotation++;
     }
-    if (attack_rotation > 9) {
+    if (attack_rotation > 5) {
         attack_rotation = 0;
     }
+    
 
+    //print_text_fmt_int(10, 180, "intro_increment: %d", intro_increment);
     //print_text_fmt_int(10, 10, "attack_rotation = %d", attack_rotation);
-/*
+    
+if (attack_rotation == 0){
     if (battle_timer == 200) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 2587, -31402, 0, 0, 0);
     }
     if (battle_timer == 195) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27398, 2804, -31402, 0, 0, 0);
     }
-*/
-/*
+}
+ 
+if (attack_rotation == 1){
     if (battle_timer == 195) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 3791, -31382, 0, 0, 0);
 		
@@ -428,12 +448,84 @@ void bhv_mario_update(void) {
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
     }
-    */
+}
+if (attack_rotation == 2){
     if (battle_timer == 195) {
-        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28141, 2851, -31382, 0, 0, 0);
-        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28685, 3727, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28759, 2854, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 27523, 2854, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28685, 3733, -31382, 0, 0, 0);
         spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 27622, 3733, -31382, 0, 0, 0);
     }
+}
+
+
+if (attack_rotation == 3){
+if (battle_timer == 195) {
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 27449, 3302, -31382, 0, 0, 0);
+        spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 3791, -31382, 0, 0, 0);
+		spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 3598, -31382, 0, 0, 0);      
+}
+        if (battle_timer == 155) {
+            spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2750, -31382, 0, 0, 0);
+            spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2558, -31382, 0, 0, 0);
+}
+}
+
+
+if (attack_rotation == 4){
+if (battle_timer == 190) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2750, -31382, 0, 0, 0);
+}
+if (battle_timer == 180) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2558, -31382, 0, 0, 0);  
+}
+if (battle_timer == 170) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2750, -31382, 0, 0, 0);
+}
+if (battle_timer == 160) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2558, -31382, 0, 0, 0);  
+}
+if (battle_timer == 140) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+}
+if (battle_timer == 130) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+if (battle_timer == 120) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+}
+if (battle_timer == 110) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+}
+
+
+if (attack_rotation == 5){
+if (battle_timer == 190) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 27443, 2878, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_SNUFIT, bhvSnufit, 28819, 2875, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+if (battle_timer == 180) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+if (battle_timer == 170) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+if (battle_timer == 160) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+}
+}
+
+if (attack_rotation == 6){
+if (battle_timer == 190) {
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 27397, 2750, -31382, 0, 0, 0);
+}
+}
     battle_timer--;
     
     if (battle_timer < 0) {
@@ -446,11 +538,51 @@ void bhv_mario_update(void) {
     MarioMaxHp = 90;
 
 if (dodge_section == 0){
+if (MarioCurrHp > 0 && BowserCurrHp > 0 && LuigiCurrHp > 0){
 HealthCycleTimer++;
 if (HealthCycleTimer > 2) {
     HealthCycleTimer = 0;
 }
 }
+if (MarioCurrHp > 0 && BowserCurrHp > 0 && LuigiCurrHp <= 0){
+HealthCycleTimer++;
+if (HealthCycleTimer > 1) {
+    HealthCycleTimer = 0;
+}
+}
+if (MarioCurrHp <= 0 && BowserCurrHp > 0 && LuigiCurrHp > 0){
+HealthCycleTimer++;
+if (HealthCycleTimer > 2) {
+    HealthCycleTimer = 1;
+}
+}
+if (MarioCurrHp > 0 && BowserCurrHp <= 0 && LuigiCurrHp > 0){
+    HealthCycleTimer++;
+if (HealthCycleTimer > 2) {
+    HealthCycleTimer = 0;
+}
+if (HealthCycleTimer == 1) {
+    HealthCycleTimer = 2;
+}
+}
+
+
+
+if (MarioCurrHp > 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0){
+    HealthCycleTimer = 0;
+}
+
+
+if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp > 0){
+    HealthCycleTimer = 2;
+}
+if (MarioCurrHp <= 0 && BowserCurrHp > 0 && LuigiCurrHp <= 0){
+
+    HealthCycleTimer = 1;
+
+}
+}
+
 /*
 print_text_fmt_int(0,0,"LastLevel: %d", LastLevel);
 print_text_fmt_int(0,15,"LastArea: %d", LastArea);
@@ -476,6 +608,7 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
             RPG_mode = 0;
             death_timer_init = 0;
             death_timer = 0;
+            battle_timer = 0;
         }
         }
     }
@@ -555,6 +688,7 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
     }
     //print_text_fmt_int(20,20, "Battle_Won %d", Battle_Won);
     if ((Battle_Won == 1) && current_turn == 4){
+
         current_turn = 1;
         battle_timer = 0;
     }
@@ -635,26 +769,97 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
 
     if (battle_id == 1){
     enemy_1 = 1; //goomba
-    enemy_2 = 1; //goomba
+    enemy_2 = 1; 
     }
     if (battle_id == 2){
-    enemy_1 = 2; //goomba
-    enemy_2 = 2; //koopa
+    enemy_1 = 2; //koopa
+    enemy_2 = 2; 
+    }
+    if (battle_id == 3){
+    enemy_1 = 3; //urgh
+    enemy_2 = 3; 
+    }
+    if (battle_id == 4){
+    enemy_1 = 3; 
+    enemy_2 = 1; 
+    }
+    if (battle_id == 5){
+    enemy_1 = 3;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 6){
+    enemy_1 = 3;
+    enemy_2 = 1; 
+    }
+    if (battle_id == 7){
+    enemy_1 = 3;
+    enemy_2 = 3; 
+    }
+    if (battle_id == 8){
+    enemy_1 = 3;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 9){
+    enemy_1 = 1;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 10){
+    enemy_1 = 2;
+    enemy_2 = 1; 
+    }
+    if (battle_id == 11){
+    enemy_1 = 3; 
+    enemy_2 = 1; 
+    }
+    if (battle_id == 12){
+    enemy_1 = 3;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 13){
+    enemy_1 = 3;
+    enemy_2 = 1; 
+    }
+    if (battle_id == 14){
+    enemy_1 = 3;
+    enemy_2 = 3; 
+    }
+    if (battle_id == 15){
+    enemy_1 = 1;
+    enemy_2 = 1; 
+    }
+    if (battle_id == 16){
+    enemy_1 = 1;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 100){
+    enemy_1 = 4;
+    enemy_2 = 0; 
+    fawful_battle = 1;
     }
     if (enemy_1 == 1){
-    Enemy1Ratio = enemy_1_health / 2.105;
+    Enemy1Ratio = enemy_1_health / 2.894;
     }
     if (enemy_2 == 1){
-    Enemy2Ratio = enemy_2_health / 2.105;
+    Enemy2Ratio = enemy_2_health / 2.894;
     }
     if (enemy_1 == 2){
-    Enemy1Ratio = enemy_1_health / 3.157;
+    Enemy1Ratio = enemy_1_health / 3.552;
     }
     if (enemy_2 == 2){
-    Enemy2Ratio = enemy_2_health / 3.157;
+    Enemy2Ratio = enemy_2_health / 3.552;
+    }
+    if (enemy_1 == 3){
+    Enemy1Ratio = enemy_1_health / 4.210;
+    }
+    if (enemy_2 == 3){
+    Enemy2Ratio = enemy_2_health / 4.210;
+    }
+    if (enemy_1 == 4){
+    Enemy1Ratio = enemy_1_health / 26.315;
     }
 
-
+    //print_text_fmt_int(20,70, "fawful_battle_won %d", fawful_battle_won);
+    //print_text_fmt_int(20,90, "fawful_battle %d", fawful_battle);
     enemy_1_spare = enemy_1_mercy / 2.563;
     enemy_2_spare = enemy_2_mercy / 2.563;
     HealthRatioMario = MarioCurrHp / 2.307;
@@ -712,7 +917,7 @@ print_text_fmt_int(20,20, "X %d", MarioOWX);
 print_text_fmt_int(20,40, "Y %d", MarioOWY);
 print_text_fmt_int(20,60, "Z %d", MarioOWZ);
 */
-
+if (gCurrLevelNum == LEVEL_WF){
     u8 *texture_location_in_ram2 = segmented_to_virtual(&wf_dl_lit_up_path_base_rgba16);
 
     dma_read(texture_location_in_ram2,(frame2*2048)+lightpath_segment,(frame2*2048)+lightpath_segment+2048);
@@ -860,6 +1065,8 @@ print_text_fmt_int(20,60, "Z %d", MarioOWZ);
         }
         }
 
+
+}
              u8 *texture_location_in_ram14 = segmented_to_virtual(&determination_determination_base_rgba16);
 
 
@@ -872,6 +1079,10 @@ third_speed14++;
         frame14 = 0;
         }
         }
+
+        if (gCurrLevelNum == LEVEL_CCM && gMarioState->pos[1] < -173){
+            level_trigger_warp(gMarioState, WARP_OP_BONFIRE);
+        }
   
         //if (gPlayer1Controller->buttonPressed & R_TRIG){
         //RPG_mode = 0;
@@ -881,10 +1092,11 @@ third_speed14++;
         //CurrTP++;
         //}
 
-/*
+
     if (gPlayer1Controller->buttonPressed & L_TRIG){
-        BowserCurrHp = 0;
+        enemy_1_health = 0;
     }
+    /*
     if (gPlayer1Controller->buttonPressed & R_TRIG){
         MarioCurrHp = 0;
     }
@@ -892,6 +1104,7 @@ third_speed14++;
         LuigiCurrHp = 0;
     }
     */
+    
     
 //print_text_fmt_int(10,0, "enemy_2_health: %d", enemy_2_health);
 //print_text_fmt_int(10,15, "enemy_1_health: %d", enemy_1_health);
@@ -908,22 +1121,34 @@ bowser_tot_damage = bowser_base_damage * bowser_multiplier;
 luigi_tot_damage = luigi_base_damage * luigi_multiplier;
 
 if (rpg_initializer == 1){
-if (enemy_1 == 1){
-        enemy_1_health = 80;
-        enemy_1_max_health = 80;
+if (enemy_1 == 1){ // 1 goomba
+        enemy_1_health = 110;
+        enemy_1_max_health = 110;
     }
 if (enemy_2 == 1){
-        enemy_2_health = 80;
-        enemy_2_max_health = 80;
+        enemy_2_health = 110;
+        enemy_2_max_health = 110;
     }
-if (enemy_1 == 2){
-        enemy_1_health = 120;
-        enemy_1_max_health = 120;
+if (enemy_1 == 2){ // 2 koopa
+        enemy_1_health = 135;
+        enemy_1_max_health = 135;
     }
 if (enemy_2 == 2){
-        enemy_2_health = 120;
-        enemy_2_max_health = 120;
+        enemy_2_health = 135;
+        enemy_2_max_health = 135;
     }
+if (enemy_1 == 3){ // 3 thwomp car
+        enemy_1_health = 160;
+        enemy_1_max_health = 160;
+    }
+if (enemy_2 == 3){
+        enemy_2_health = 160;
+        enemy_2_max_health = 160;
+    }
+if (enemy_1 == 4){ // 4 fawful
+        enemy_1_health = 1000;
+        enemy_1_max_health = 1000;
+}
 }
 if (current_turn == 4){
 
@@ -987,7 +1212,12 @@ if (luigi_enemy_selected == 2){
 if (luigi_enemy_selected == 1){
     if (luigi_action_type == 2){
         if (luigi_action_selected == 1){
+            if (fawful_battle == 0){
             enemy_1_mercy += 25;
+            }
+            if (fawful_battle == 1){
+            enemy_1_mercy += 5;
+            }
         }
 
     }
@@ -1013,8 +1243,13 @@ if ((luigi_enemy_selected == 2) | luigi_enemy_selected == 1){
 
 if (mario_action_selected == 2){
     if (mario_action_type == 2){
-                                if (mario_enemy_selected == 1){
+                        if (mario_enemy_selected == 1){
+                            if (fawful_battle == 0){
                             enemy_1_mercy += 25;
+                            }
+                            if (fawful_battle == 1){
+                            enemy_1_mercy += 5;
+                            }
                         }
                         if (mario_enemy_selected == 2){
                             enemy_2_mercy += 25;
@@ -1023,7 +1258,12 @@ if (mario_action_selected == 2){
 }
 if (mario_action_type == 4){
     if (mario_enemy_selected == 1){
+        if (fawful_battle == 0){
         enemy_1_mercy += 10;
+        }
+        if (fawful_battle == 1){
+        enemy_1_mercy += 2;
+        }
         if (enemy_1_mercy >= 100){
             enemy_1_health = 0;
         }
@@ -1043,7 +1283,12 @@ if (mario_action_type == 4){
             }
         }
         if (bowser_enemy_selected == 1){
+            if (fawful_battle == 0){
             enemy_1_mercy += 10;
+            }
+            if (fawful_battle == 1){
+            enemy_1_mercy += 2;
+            }
             if (enemy_1_mercy >= 100){
                 enemy_1_health = 0;
             }
@@ -1058,7 +1303,12 @@ if (mario_action_type == 4){
             }
         }
         if (luigi_enemy_selected == 1){
+            if(fawful_battle == 0){
             enemy_1_mercy += 10;
+            }
+            if (fawful_battle == 1){
+            enemy_1_mercy += 2;
+            }
             if (enemy_1_mercy >= 100){
                 enemy_1_health = 0;
             }

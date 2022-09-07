@@ -151,6 +151,7 @@ extern const BehaviorScript bhvGrandStar[];
 extern const BehaviorScript bhvBetaBooKey[];
 extern const BehaviorScript bhvAlphaBooKey[];
 extern const BehaviorScript bhvBulletBill[];
+extern const BehaviorScript bhvBulletBillSin[];
 extern const BehaviorScript bhvWhitePuffSmoke[];
 extern const BehaviorScript bhvBowserTailAnchor[];
 extern const BehaviorScript bhvBowser[];
@@ -542,14 +543,22 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvBattleGoomba[];
 extern const BehaviorScript bhvBattleKoopa[];
+extern const BehaviorScript bhvBattleThwomp[];
 extern const BehaviorScript bhvBattleBowser[];
 extern const BehaviorScript bhvBattleMario[];
 extern const BehaviorScript bhvBattleBox[];
 extern const BehaviorScript bhvThwompCar[];
+extern const BehaviorScript bhvWhompCar[];
 extern const BehaviorScript bhvFieldBowser[];
 extern const BehaviorScript bhvFieldLuigi[];
 extern const BehaviorScript bhvBonfire[];
-extern const BehaviorScript bhvIntroBowser[];
+extern const BehaviorScript bhvIntroTalkBowser[];
+extern const BehaviorScript bhvIntroWalkBowser[];
+extern const BehaviorScript bhvBigToad[];
+extern const BehaviorScript bhvLibraryDoor[];
+extern const BehaviorScript bhvOutOfBounds[];
+extern const BehaviorScript bhvDumpster[];
+extern const BehaviorScript bhvFieldFawful[];
 
 
 #endif // BEHAVIOR_DATA_H

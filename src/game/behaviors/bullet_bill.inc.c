@@ -1,5 +1,6 @@
 // bullet_bill.inc.c
 extern battle_timer;
+extern attack_rotation;
 void bhv_white_puff_smoke_init(void) {
     cur_obj_scale(random_float() * 2 + 2.0);
 }
@@ -37,6 +38,12 @@ void bullet_bill_act_2(void) {
 
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
         o->oForwardVel = 40.0f;
+
+
+
+        
+        
+        
 
 
 

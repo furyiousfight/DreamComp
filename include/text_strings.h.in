@@ -94,21 +94,44 @@
 #define TEXT_HUD_TEST_3 _("And there's even more text here at the bottom")
 
 #define TEXT_HUD_GOOMBA _("Floomba")
+#define TEXT_HUD_GOOMBA_CHECK_1 _("Floomba - 110 HP")
 
 #define TEXT_HUD_GOOMBA_CHECK_2 _("More of a lover than a fighter")
 #define TEXT_HUD_GOOMBA_CHECK_3 _("Susceptible to easy flattery")
 
 #define TEXT_HUD_KOOPA _("Subway Koopa")
+
 #define TEXT_HUD_KOOPA_ACT_2 _("Order")
 #define TEXT_HUD_KOOPA_ACT_3 _("X-Order")
 
 #define TEXT_HUD_CHECK _("Check")
 
-#define TEXT_HUD_KOOPA_CHECK_2 _("A little bit of a fighter")
-#define TEXT_HUD_KOOPA_CHECK_3 _("Not very susceptible to easy flattery")
+#define TEXT_HUD_KOOPA_CHECK_1 _("Subway Koopa - 135 HP")
+#define TEXT_HUD_KOOPA_CHECK_2 _("Yo yo, it's a him Mario")
+#define TEXT_HUD_KOOPA_CHECK_3 _("I'm the subway koopa, don'tcha know")
 
 #define TEXT_HUD_GOOMBA_ACT_2 _("Flirt")
 #define TEXT_HUD_GOOMBA_ACT_3 _("X-Flirt")
+
+#define TEXT_HUD_THWOMP _("Thwomp Car")
+#define TEXT_HUD_THWOMP_ACT_2 _("Urgh")
+#define TEXT_HUD_THWOMP_ACT_3 _("X-Urgh")
+
+#define TEXT_HUD_THWOMP_CHECK_1 _("Thwomp Car - 160 HP")
+#define TEXT_HUD_THWOMP_CHECK_2 _("Urgh Urgh Urgh?")
+#define TEXT_HUD_THWOMP_CHECK_3 _("Urgh Urgh!")
+
+#define TEXT_HUD_FAWFUL _("Fawful")
+
+#define TEXT_HUD_FAWFUL_CHECK_1 _("Fawful - 1000 HP")
+#define TEXT_HUD_FAWFUL_CHECK_2 _("The cause of all this trouble.")
+#define TEXT_HUD_FAWFUL_CHECK_3 _("Get him!")
+
+#define TEXT_HUD_FAWFUL_ACT_2 _("Ignore")
+#define TEXT_HUD_FAWFUL_ACT_3 _("X-Ignore")
+
+
+#define TEXT_HUD_YOU_WON _("You won! Returning to the overworld...")
 
 // item text
 #define TEXT_HUD_UNLIMITED_BREADSTICKS _("Unlimited Breadsticks")
@@ -138,6 +161,7 @@
 
 #define TEXT_HUD_PACIFY_SKILL1 _("Increases Mercy of")
 #define TEXT_HUD_PACIFY_SKILL2 _("one enemy By 25%")
+#define TEXT_HUD_PACIFY_SKILL2_FAWFUL _("fawful by 10%")
 #define TEXT_HUD_PACIFY_TP _("20% TP")
 
 #define TEXT_HUD_HEAL_PRAYER_SKILL1 _("Heals the party")
@@ -316,7 +340,7 @@
  * Menus Text (Pause, Course Completed)
  */
 // Main Courses
-#define TEXT_COURSE _("COURSE")
+#define TEXT_COURSE _("")
 #define TEXT_MYSCORE _("MYSCORE")
 #define TEXT_CONTINUE _("CONTINUE")
 #define TEXT_EXIT_COURSE _("EXIT COURSE")

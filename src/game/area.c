@@ -69,6 +69,8 @@ extern bowser_action_selected;
 extern checked;
 extern enemy_1;
 extern enemy_2;
+extern Battle_Won;
+extern fawful_battle;
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -86,14 +88,23 @@ u8 Test2[] = { TEXT_HUD_TEST_2 };
 u8 Test3[] = { TEXT_HUD_TEST_3 };
 u8 Test4[] = { TEXT_HUD_TEST_LONG };
 u8 Goomba[] = { TEXT_HUD_GOOMBA };
+u8 GoombaCheck1[] = { TEXT_HUD_GOOMBA_CHECK_1 };
 u8 GoombaCheck2[] = { TEXT_HUD_GOOMBA_CHECK_2 };
 u8 GoombaCheck3[] = { TEXT_HUD_GOOMBA_CHECK_3 };
 u8 Koopa[] = { TEXT_HUD_KOOPA };
+u8 KoopaCheck1[] = { TEXT_HUD_KOOPA_CHECK_1 };
 u8 KoopaCheck2[] = { TEXT_HUD_KOOPA_CHECK_2 };
 u8 KoopaCheck3[] = { TEXT_HUD_KOOPA_CHECK_3 };
 
-u8 Check[] = { TEXT_HUD_CHECK };
+u8 Thwomp[] = { TEXT_HUD_THWOMP };
+u8 ThwompAct2[] = { TEXT_HUD_THWOMP_ACT_2 };
+u8 ThwompAct3[] = { TEXT_HUD_THWOMP_ACT_3 };
+u8 ThwompCheck1[] = { TEXT_HUD_THWOMP_CHECK_1 };
+u8 ThwompCheck2[] = { TEXT_HUD_THWOMP_CHECK_2 };
+u8 ThwompCheck3[] = { TEXT_HUD_THWOMP_CHECK_3 };
 
+u8 Check[] = { TEXT_HUD_CHECK };
+u8 YouWon[] = { TEXT_HUD_YOU_WON };
 u8 GoombaAct2[] = { TEXT_HUD_GOOMBA_ACT_2 };
 u8 GoombaAct3[] = { TEXT_HUD_GOOMBA_ACT_3 };
 
@@ -112,6 +123,7 @@ u8 UnlimitedBreadsticks[] = { TEXT_HUD_UNLIMITED_BREADSTICKS };
 u8 Pacify[] = { TEXT_HUD_PACIFY };
 u8 PacifySkill1[] = { TEXT_HUD_PACIFY_SKILL1 };
 u8 PacifySkill2[] = { TEXT_HUD_PACIFY_SKILL2 };
+u8 PacifySkill2Fawful[] = { TEXT_HUD_PACIFY_SKILL2_FAWFUL };
 u8 PacifyTP[] = { TEXT_HUD_PACIFY_TP };
 
 u8 Heal_Prayer[] = { TEXT_HUD_HEAL_PRAYER };
@@ -128,6 +140,13 @@ u8 DuoBuster[] = { TEXT_HUD_DUO_BUSTER };
 u8 DuoBusterSkill1[] = { TEXT_HUD_DUO_BUSTER_SKILL1 };
 u8 DuoBusterSkill2[] = { TEXT_HUD_DUO_BUSTER_SKILL2 };
 u8 DuoBusterTP[] = { TEXT_HUD_DUO_BUSTER_TP };
+
+u8 Fawful[] = { TEXT_HUD_FAWFUL };
+u8 FawfulAct2[] = { TEXT_HUD_FAWFUL_ACT_2 };
+u8 FawfulAct3[] = { TEXT_HUD_FAWFUL_ACT_3 };
+u8 FawfulCheck1[] = { TEXT_HUD_FAWFUL_CHECK_1 };
+u8 FawfulCheck2[] = { TEXT_HUD_FAWFUL_CHECK_2 };
+u8 FawfulCheck3[] = { TEXT_HUD_FAWFUL_CHECK_3 };
 
 u8 Enemy1Text[];
 s16 gCurrCourseNum;
@@ -544,7 +563,7 @@ void render_game(void) {
         int_to_str(LuigiMaxHp,ValueText);
         print_generic_string(302,65+menu_pos,ValueText);
         if (menu_phase == 0){
-            if (checked == 0){
+            if (checked == 0 && Battle_Won == 0){
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
         print_generic_string(25,26+menu_pos,Test1);
@@ -554,7 +573,7 @@ void render_game(void) {
             if (((checked == 1) && enemy_1 == 1) | ((checked == 2) && enemy_2 == 1)){
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
-        print_generic_string(25,26+menu_pos,Goomba);
+        print_generic_string(25,26+menu_pos,GoombaCheck1);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(25,13+menu_pos,GoombaCheck2);
         print_generic_string(25,0+menu_pos,GoombaCheck3);
@@ -562,10 +581,32 @@ void render_game(void) {
             if (((checked == 1) && enemy_1 == 2) | ((checked == 2) && enemy_2 == 2)){
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
-        print_generic_string(25,26+menu_pos,Koopa);
+        print_generic_string(25,26+menu_pos,KoopaCheck1);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(25,13+menu_pos,KoopaCheck2);
         print_generic_string(25,0+menu_pos,KoopaCheck3);
+            }
+            if (((checked == 1) && enemy_1 == 3) | ((checked == 2) && enemy_2 == 3)){
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+        print_generic_string(10,selection_pos+menu_pos, TextStar);
+        print_generic_string(25,26+menu_pos,ThwompCheck1);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        print_generic_string(25,13+menu_pos,ThwompCheck2);
+        print_generic_string(25,0+menu_pos,ThwompCheck3);
+            }
+            if (((checked == 1) && enemy_1 == 4) | ((checked == 2) && enemy_2 == 4)){
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+        print_generic_string(10,selection_pos+menu_pos, TextStar);
+        print_generic_string(25,26+menu_pos,FawfulCheck1);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        print_generic_string(25,13+menu_pos,FawfulCheck2);
+        print_generic_string(25,0+menu_pos,FawfulCheck3);
+            }
+            if (Battle_Won == 1){
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+        print_generic_string(10,selection_pos+menu_pos, TextStar);
+        print_generic_string(25,26+menu_pos,YouWon);
+
             }
         }
         if (menu_phase == 1){ //menu_phase 1, selecting the enemy
@@ -581,6 +622,16 @@ void render_game(void) {
                 print_generic_string(10,selection_pos, TextStar);
                 print_generic_string(25,26+menu_pos,Koopa);
                 }
+                if (enemy_1 == 3){
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                print_generic_string(10,selection_pos, TextStar);
+                print_generic_string(25,26+menu_pos,Thwomp);
+                }
+                if (enemy_1 == 4){
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                print_generic_string(10,selection_pos, TextStar);
+                print_generic_string(25,26+menu_pos,Fawful);
+                }
             }
             if (enemy_1_health <= 0){
                     if (enemy_1 == 1){
@@ -593,6 +644,11 @@ void render_game(void) {
                 print_generic_string(10,selection_pos, TextStar);
                 print_generic_string(25,26+menu_pos,Koopa);
                 }
+                if (enemy_1 == 3){
+                gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
+                print_generic_string(10,selection_pos, TextStar);
+                print_generic_string(25,26+menu_pos,Thwomp);
+                }
             }
             if (enemy_2_health > 0){
                 if (enemy_2 == 1){
@@ -603,6 +659,10 @@ void render_game(void) {
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
             print_generic_string(25,13+menu_pos,Koopa);
                 }
+                if (enemy_2 == 3){
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            print_generic_string(25,13+menu_pos,Thwomp);
+                }
             }
             if (enemy_2_health <= 0){
                 if (enemy_2 == 1){
@@ -612,6 +672,10 @@ void render_game(void) {
                 if (enemy_2 == 2){
             gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
             print_generic_string(25,13+menu_pos,Koopa);
+                }
+                if (enemy_2 == 3){
+            gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
+            print_generic_string(25,13+menu_pos,Thwomp);
                 }
             }
             
@@ -627,6 +691,10 @@ void render_game(void) {
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
                 print_generic_string(25,26+menu_pos,Koopa);
                 }
+                    if (enemy_1 == 3){
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                print_generic_string(25,26+menu_pos,Thwomp);
+                }
             }
             if (enemy_1_health <= 0){
                     if (enemy_1 == 1){
@@ -636,6 +704,10 @@ void render_game(void) {
                     if (enemy_1 == 2){
                 gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
                 print_generic_string(25,26+menu_pos,Koopa);
+                }
+                    if (enemy_1 == 3){
+                gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
+                print_generic_string(25,26+menu_pos,Thwomp);
                 }
             }
             if (enemy_2_health > 0){
@@ -649,6 +721,11 @@ void render_game(void) {
             print_generic_string(10,selection_pos, TextStar);
             print_generic_string(25,13+menu_pos,Koopa);
                 }
+                if (enemy_2 == 3){
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+            print_generic_string(10,selection_pos, TextStar);
+            print_generic_string(25,13+menu_pos,Thwomp);
+                }
             }
             if (enemy_2_health <= 0){
                 if (enemy_2 == 1){
@@ -660,6 +737,11 @@ void render_game(void) {
             gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
             print_generic_string(10,selection_pos, TextStar);
             print_generic_string(25,13+menu_pos,Koopa);
+                }
+                if (enemy_2 == 3){
+            gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
+            print_generic_string(10,selection_pos, TextStar);
+            print_generic_string(25,13+menu_pos,Thwomp);
                 }
             }
             }
@@ -781,7 +863,12 @@ void render_game(void) {
                 print_generic_string(25,13+menu_pos,Heal_Prayer);
                 gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
                 print_generic_string(220,26+menu_pos,PacifySkill1);
+                if (fawful_battle == 0){
                 print_generic_string(220,13+menu_pos,PacifySkill2);
+                        }
+                if (fawful_battle == 1){
+                print_generic_string(220,13+menu_pos,PacifySkill2Fawful);
+                        }
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
                 print_generic_string(245,0+menu_pos,PacifyTP);
                         }
@@ -794,7 +881,12 @@ void render_game(void) {
                 print_generic_string(25,13+menu_pos,Heal_Prayer);
                 gDPSetEnvColor(gDisplayListHead++, 117, 117, 117, 255);
                 print_generic_string(220,26+menu_pos,PacifySkill1);
+                if (fawful_battle == 0){
                 print_generic_string(220,13+menu_pos,PacifySkill2);
+                }
+                if (fawful_battle == 1){
+                print_generic_string(220,13+menu_pos,PacifySkill2Fawful);
+                }
                 gDPSetEnvColor(gDisplayListHead++, 132, 0, 0, 255);
                 print_generic_string(245,0+menu_pos,PacifyTP);
                         }
@@ -966,6 +1058,108 @@ void render_game(void) {
                                 }
                             }
                         } // end of enemy 2
+                        if (enemy_1 == 3){
+                        if (enemy_selected == 1){
+                            if (vertical_option == 1){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,26+menu_pos,Check);
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); 
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+            
+                                }
+                            if (vertical_option == 2){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+                                }
+                            if (vertical_option == 3){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                }
+                            }
+                        }
+                    if (enemy_2 == 3){
+                        if (enemy_selected == 2){
+                            if (vertical_option == 1){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,26+menu_pos,Check);
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); 
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+            
+                                }
+                            if (vertical_option == 2){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+                                }
+                            if (vertical_option == 3){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,0+menu_pos,ThwompAct3);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,13+menu_pos,ThwompAct2);
+                                }
+                            }
+                        } //end of enemy 3
+                        if (enemy_1 == 4){
+                        if (enemy_selected == 1){
+                            if (vertical_option == 1){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,26+menu_pos,Check);
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); 
+                                print_generic_string(25,13+menu_pos,FawfulAct2);
+                                print_generic_string(25,0+menu_pos,FawfulAct3);
+            
+                                }
+                            if (vertical_option == 2){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,13+menu_pos,FawfulAct2);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,0+menu_pos,FawfulAct3);
+                                }
+                            if (vertical_option == 3){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                                print_generic_string(10,selection_pos, TextStar);
+                                print_generic_string(25,0+menu_pos,FawfulAct3);
+                                
+
+                                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                                print_generic_string(25,26+menu_pos,Check);
+                                print_generic_string(25,13+menu_pos,FawfulAct2);
+                                }
+                            }
+                        }
                 }
                     }
                     if (current_turn == 4){
@@ -998,28 +1192,42 @@ void render_game(void) {
                         if (mario_enemy_selected == 2){
                             if (mario_action_type == 1){
                                 gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, DamageFadeOut);
-                                print_generic_string(185,180,TextMinus);
+                                print_generic_string(230,115,TextMinus);
                                 int_to_str(mario_tot_damage,ValueText);
-                                print_generic_string(190,180,ValueText);
+                                print_generic_string(235,115,ValueText);
                             }
                         }
                         
                         if (bowser_enemy_selected == 2){
                             if((bowser_action_type == 1) | (bowser_action_type == 2)){
                                 gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
-                                print_generic_string(191,167,TextMinus);
+                                print_generic_string(235,100,TextMinus);
                                 int_to_str(bowser_tot_damage,ValueText);
-                                print_generic_string(196,167,ValueText);
+                                print_generic_string(240,100,ValueText);
                             }
                 
                         }
                         if (luigi_enemy_selected == 2){
                             if (luigi_action_type == 1){
                                 gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, DamageFadeOut);
-                                 print_generic_string(196,154,TextMinus);
+                                 print_generic_string(240,85,TextMinus);
                                 int_to_str(luigi_tot_damage,ValueText);
-                                print_generic_string(201,154,ValueText);
+                                print_generic_string(245,85,ValueText);
                             }
+                        }
+                        if (bowser_action_type == 2 && bowser_action_selected == 2){
+                            
+                            if((bowser_action_type == 1) | (bowser_action_type == 2)){
+                                gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
+                                print_generic_string(235,100,TextMinus);
+                                int_to_str(bowser_tot_damage,ValueText);
+                                print_generic_string(240,100,ValueText);
+                                gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, DamageFadeOut);
+                                print_generic_string(191,167,TextMinus);
+                                int_to_str(bowser_tot_damage,ValueText);
+                                print_generic_string(196,167,ValueText);
+                            }
+                
                         }
 
                         }

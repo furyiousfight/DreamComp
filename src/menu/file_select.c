@@ -1269,6 +1269,7 @@ create_dl_translation_matrix(G_MTX_PUSH, 0, 0, 0);
 gDPSetRenderMode(gDisplayListHead++,G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 gSPDisplayList(gDisplayListHead++, &fountain_Cube_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
  u8 *texture_location_in_ram = segmented_to_virtual(&fountain_file_select_dma_base_rgba16);
 
 
@@ -1281,6 +1282,7 @@ gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
         frame = 0;
         }
         }
+
         
 }
 

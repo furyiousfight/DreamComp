@@ -18,3 +18,5 @@
 #include "mario/geo.inc.c"
 
 
+
+#include "normal_mario/geo.inc.c"

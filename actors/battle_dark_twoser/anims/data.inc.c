@@ -1,0 +1,5 @@
+#include "anim_Battle_Idle.inc.c"
+#include "anim_downed.inc.c"
+#include "anim_Attack.inc.c"
+#include "anim_Rude_Buster_001.inc.c"
+#include "anim_Act.inc.c"

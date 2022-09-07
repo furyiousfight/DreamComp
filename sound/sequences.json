@@ -134,5 +134,17 @@
     ],
     "26_custom_rude_buster": [
         "streamed_audio"
+    ],
+    "27_custom_home": [
+        "streamed_audio"
+    ],
+    "28_custom_creepydoor": [
+        "streamed_audio"
+    ],
+    "29_custom_creepylandscape": [
+        "streamed_audio"
+    ],
+    "2A_custom_theholy": [
+        "streamed_audio"
     ]
 }

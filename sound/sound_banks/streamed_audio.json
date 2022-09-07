@@ -38,12 +38,36 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "26_custom_rude_buster"
+        },
+        "inst4": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "27_custom_home"
+        },
+        "inst5": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "28_custom_creepydoor"
+        },
+        "inst6": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "29_custom_creepylandscape"
+        },
+        "inst7": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "2A_custom_theholy"
         }
     },
     "instrument_list": [
         "inst0",
         "inst1",
         "inst2",
-        "inst3"
+        "inst3",
+        "inst4",
+        "inst5",
+        "inst6",
+        "inst7"
     ]
 }

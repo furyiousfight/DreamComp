@@ -91,7 +91,7 @@ void snufit_act_idle(void) {
  */
 void snufit_act_shoot(void) {
     o->oSnufitBodyScalePeriod
-        = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 16000);
+        = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 3000);
     o->oSnufitBodyBaseScale
         = approach_s16_symmetric(o->oSnufitBodyBaseScale, 167, 167);
 

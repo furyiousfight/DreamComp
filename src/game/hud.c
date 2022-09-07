@@ -78,7 +78,9 @@ extern enemy_2_spare;
 extern enemy_1_init_explosion;
 extern enemy_2_init_explosion;
 extern SpareRatio;
-
+u32 target_debug;
+s32 TargetX = 0;
+s32 TargetY = 0;
 
 
 
@@ -613,15 +615,14 @@ gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 create_dl_translation_matrix(G_MTX_PUSH, 0, 0, 0);
 gSPDisplayList(gDisplayListHead++, &TP_Meter_TP_Meter_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-s32 TargetX;
-s32 TargetY;
+
 if (menu_phase == 1){
     if (vertical_option == 1){
-        TargetX = 220;
-        TargetY = 162;
+        TargetX = 232;
+        TargetY = 166;
     } else if (vertical_option ==2){
-        TargetX = 267;
-        TargetY = 100;
+        TargetX = 279;
+        TargetY = 96;
     
     }
 create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 50);
@@ -630,15 +631,15 @@ gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 if (menu_phase == 3){
     if (vertical_option == 1){
-        TargetX = 80;
-        TargetY = 160;
+        TargetX = 68;
+        TargetY = 214;
     } else if (vertical_option ==2){
-        TargetX = 80;
-        TargetY = 140;
+        TargetX = 87;
+        TargetY = 156;
     
     }else if (vertical_option ==3){
-        TargetX = 80;
-        TargetY = 120;
+        TargetX = 68;
+        TargetY = 96;
     }
 
 create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 50);
@@ -655,7 +656,32 @@ create_dl_translation_matrix(G_MTX_PUSH, 267, 100, 50);
 gSPDisplayList(gDisplayListHead++, &DRExplosion_DRExplosion_mesh);
 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
+/*
+if (gPlayer1Controller->buttonPressed & L_TRIG ){
 
+target_debug = 1;
+}
+if (target_debug == 1){
+        create_dl_translation_matrix(G_MTX_PUSH, TargetX, TargetY, 50);
+gSPDisplayList(gDisplayListHead++, &Target_Target_mesh);
+gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+if (gPlayer1Controller->buttonDown & U_JPAD){
+    TargetY = TargetY + 1;
+}
+if (gPlayer1Controller->buttonDown & D_JPAD){
+    TargetY = TargetY - 1;
+}
+if (gPlayer1Controller->buttonDown & L_JPAD){
+    TargetX = TargetX - 1;
+}
+if (gPlayer1Controller->buttonDown & R_JPAD){
+    TargetX = TargetX + 1;
+}
+print_text_fmt_int(0, 0, "TargetX: %d", TargetX);
+print_text_fmt_int(0, 15, "TargetY: %d", TargetY);
+}
+    */
 //create_dl_translation_matrix(G_MTX_PUSH, 107, 0, 0);
 //gSPDisplayList(gDisplayListHead++, &Battle_Actions_Cube_001_mesh);
 //gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);

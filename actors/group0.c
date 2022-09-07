@@ -35,3 +35,4 @@
 
 #include "battle_mario/anims/data.inc.c"
 #include "battle_mario/anims/table.inc.c"
+#include "normal_mario/model.inc.c"
