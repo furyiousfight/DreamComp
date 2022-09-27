@@ -36,6 +36,8 @@ extern RPG_mode;
 extern LastBonfire;
 extern LastLevel;
 extern LastArea;
+extern killed;
+extern spared;
 #include "config.h"
 
 // TODO: Make these ifdefs better
@@ -801,6 +803,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_BONFIRE:
+                
                 sDelayedWarpTimer = 30;
                 sSourceWarpNodeId = LastBonfire;
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0x00, 0x00, 0x00);
@@ -1152,6 +1155,29 @@ UNUSED static s32 play_mode_unused(void) {
 }
 
 s32 update_level(void) {
+    if (gCurrLevelNum == LEVEL_ENDING){
+            print_text_fmt_int(20, 216, "You spared %d/37 enemies", spared);
+            print_text_fmt_int(20, 200, "You killed %d/37 enemies", killed);
+        if (((spared + killed) == 0) | ((spared + killed) == 1)){
+            print_text_centered(160, 20, "speedrunner ending");
+        } else if ((spared + killed) <= 5 && (spared + killed) > 1){
+            print_text_centered(160, 20, "antisocial ending");
+        } else if (killed == 0 && spared >= 10 && spared < 37){
+            print_text_centered(160, 20, "pacifist ending");
+        } else if (killed == 0 && spared == 37){
+            print_text_centered(160, 20, "true pacifist ending");
+        } else if (killed >= 5 && killed < 37 && killed > spared + 10){
+            print_text_centered(160, 20, "no mercy ending");
+        } else if (killed == 37){
+            print_text_centered(160, 20, "genocide ending");
+        
+        } else {
+            print_text_centered(160, 20, "neutral ending");
+        }
+        set_background_music(0, SEQ_STREAMED_DONTFORGET, 0);
+        return 0;
+    }
+
     s32 changeLevel = FALSE;
 
     switch (sCurrPlayMode) {

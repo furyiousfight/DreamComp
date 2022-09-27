@@ -12,12 +12,18 @@
 #define SCRAM "scram--"
 #endif
 
-DEFINE_DIALOG(DIALOG_000, 1, 5, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
 Well well well, look who\n\
-decided to finally show up\n\
-I need you to go upstairs\n\
-and kick out bowser.\n\
-He's been annoying"))
+decided to finally show up.\n\
+We've got a pretty big\n\
+situation going on here.\n\
+Bowser is reading up on\n\
+the second floor, but he\n\
+doesn't have his library\n\
+card! This is inexcusable!\n\
+We can't let him read\n\
+without his card!\n\
+What a terrifying idea..."))
 
 DEFINE_DIALOG(DIALOG_001, 1, 3, 95, 200, _("\
 I've been done reading\n\
@@ -193,15 +199,18 @@ violence against the\n\
 denizens of this city.\n\
 Try using MERCY."))
 
-DEFINE_DIALOG(DIALOG_019, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_019, 1, 5, 30, 200, _("\
 Hack for the simpleflips\n\
 dream competition.\n\
 Additional credits:\n\
-Joopii - feedback\n\
-Rovert - code/feedback\n\
-MrComit - code help\n\
-SpK - feedback\n\
-All music from Deltarune\n\
+Joopii, SpK - Feedback\n\
+Rovert - Code & Feedback\n\
+MrComit - Code help\n\
+Yoshi Milkman, Reonu and\n\
+Anonymous Moose\n\
+ - Model Assistance\n\
+Music from Deltarune\n\
+End theme by scares009\n\
 Shoutout to Mario Jams"))
 
 DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
@@ -213,14 +222,14 @@ Yours truly--\n\
 Princess Toadstool"))
 
 DEFINE_DIALOG(DIALOG_021, 1, 4, 35, 200, _("\
-I have chortles!\n\
-Forced to live in\n\
-the shadows like the\n\
-rats of the sewer,\n\
-Fawful shall make my\n\
-triumphant return!\n\
-Rise and take over\n\
-the Mushroom Kingdom!"))
+I HAVE (chortles)!\n\
+FORCED TO LIVE IN\n\
+THE (shadows) LIKE THE\n\
+(rats of the sewer),\n\
+FAWFUL SHALL MAKE MY\n\
+(triumphant return)!\n\
+RISE AND TAKE OVER\n\
+THE (mushroom kingdom)!"))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
 You need a key to open\n\
@@ -269,143 +278,74 @@ stairs, you need 70\n\
 Stars.\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
-\n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+DEFINE_DIALOG(DIALOG_030, 1, 3, 30, 200, _("\
+Looking for secrets?\n\
+Sorry, but some iiiiidiot\n\
+already found them"))
 
 DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
-No way! You beat me...\n\
-again!! And I just spent\n\
-my entire savings on\n\
-these new Koopa\n\
-Mach 1 Sprint shoes!\n\
-Here, I guess I have to\n\
-hand over this Star to\n\
-the winner of the race.\n\
-Congrats, Mario!"))
+I knew you were a kind\n\
+and gentle soul, Mario.\n\
+The mercy you showed\n\
+to your enemies is\n\
+truly admirable.\n\
+Now, lets get you home.\n\
+Just hop in the fountain\n\
+and you will be taken\n\
+back to your own world."))
 
 DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+Well, Mario, you've\n\
+done it. You've fought\n\
+your way through a tough\n\
+predicament, although\n\
+surely some violence\n\
+could have been avoided.\n\
+Now, lets get you home.\n\
+Just hop in the fountain\n\
+and you will be taken\n\
+back to your own world."))
 
-DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+DEFINE_DIALOG(DIALOG_033, 1, 5, 30, 200, _("\
+I am truly disgusted\n\
+by you, Mario. You\n\
+vile, despicable, cretin.\n\
+You have no respect for\n\
+the sanctity of life.\n\
+Killing as many as you\n\
+can, just for the fun of\n\
+it? The fountain will\n\
+take you home. Enter it\n\
+and never come back."))
 
-DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
-Good afternoon. The\n\
-Lakitu Bros., here,\n\
-reporting live from just\n\
-outside the Princess's\n\
-castle.\n\
-\n\
-Mario has just arrived\n\
-on the scene, and we'll\n\
-be filming the action live\n\
-as he enters the castle\n\
-and pursues the missing\n\
-Power Stars.\n\
-As seasoned cameramen,\n\
-we'll be shooting from the\n\
-recommended angle, but\n\
-you can change the\n\
-camera angle by pressing\n\
-the [C] Buttons.\n\
-If we can't adjust the\n\
-view any further, we'll\n\
-buzz. To take a look at\n\
-the surroundings, stop\n\
-and press [C]^.\n\
-\n\
-Press [A] to resume play.\n\
-Switch camera modes with\n\
-the [R] Button. Signs along\n\
-the way will review these\n\
-instructions.\n\
-\n\
-For now, reporting live,\n\
-this has been the\n\
-Lakitu Bros."))
+DEFINE_DIALOG(DIALOG_034, 1, 4, 30, 200, _("\
+Gwah, should have known\n\
+you'd take the BORING\n\
+route! If theres one thing\n\
+I can count on, it's on\n\
+Mario being a goody\n\
+two-shoes. Whatever,\n\
+let's close this thing\n\
+and get out of here..."))
 
-DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
-There are four camera, or\n\
-『[C],』 Buttons. Press [C]^\n\
-to look around using the\n\
-Control Stick.\n\
-\n\
-You'll usually see Mario\n\
-through Lakitu's camera.\n\
-It is the camera\n\
-recommended for normal\n\
-play.\n\
-You can change angles by\n\
-pressing [C]>. If you press\n\
-[R], the view switches to\n\
-Mario's camera, which\n\
-is directly behind him.\n\
-Press [R] again to return\n\
-to Lakitu's camera. Press\n\
-[C]| to see Mario from\n\
-afar, using either\n\
-Lakitu's or Mario's view."))
+DEFINE_DIALOG(DIALOG_035, 1, 4, 30, 200, _("\
+Gwahaha! Attaboy Mario!\n\
+A little Carnage never\n\
+hurt anybody! Mostly,\n\
+anyway. I never knew you\n\
+could be so cool! Let's\n\
+do this again sometime, I\n\
+could use a good workout!"))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-OBSERVATION PLATFORM\n\
-Press [C]^ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+DEFINE_DIALOG(DIALOG_036, 1, 4, 30, 200, _("\
+Sheesh... I know I'm evil\n\
+and all, but I think you\n\
+need to dial it back a\n\
+little... H-hey, don't\n\
+look at me like that!\n\
+I think we should leave,\n\
+You're not acting like\n\
+yourself..."))
 
 DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
 I win! You lose!\n\
@@ -942,16 +882,18 @@ and free us from this\n\
 awful prison!\n\
 Please!"))
 
-DEFINE_DIALOG(DIALOG_076, 1, 3, 30, 200, _("\
-Mario is that you?\n\
-Maybe this isn't some\n\
-weird dream after all...\n\
-Let's get down to it,\n\
-We need to find a way out\n\
-of here. There's a weirdo\n\
-over by that tunnel who\n\
-might be able to help us.\n\
-I'll follow your lead."))
+DEFINE_DIALOG(DIALOG_076, 1, 4, 30, 200, _("\
+Crud, as if this couldn't\n\
+get any worse. First I\n\
+fall down here, now\n\
+MARIO shows up... I just\n\
+wanted to read! Whatever.\n\
+If you're stuck down here\n\
+too, I guess we're better\n\
+off putting our heads\n\
+together. Don't go\n\
+calling yourself leader\n\
+or anything!"))
 
 DEFINE_DIALOG(DIALOG_077, 1, 2, 150, 200, _("\
 It is decreed that one\n\
@@ -993,13 +935,22 @@ The city welcomes visitors\n\
 with the depth they bring\n\
 as they enter."))
 
-DEFINE_DIALOG(DIALOG_082, 1, 3, 30, 200, _("\
-Mario?\n\
-You're here to kick me\n\
-out of here, aren't you?\n\
-I don't have to take this\n\
-from you! I'm leaving\n\
-and you can't stop me!"))
+DEFINE_DIALOG(DIALOG_082, 1, 4, 30, 200, _("\
+Grgg... Mario?\n\
+What do you want?\n\
+I'm busy reading...\n\
+these words are really\n\
+stupid, but apparently\n\
+if I read them, I'll\n\
+be an irresistible stud!\n\
+Gwahahar!\n\
+What? A Library Card?\n\
+Grumble... should have\n\
+known some know-it-all\n\
+would tell on me.\n\
+When I get back with\n\
+that card, you'll be\n\
+SORRY!"))
 
 DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
 Ah, Hello! I couldn't\n\

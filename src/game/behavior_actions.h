@@ -56,9 +56,11 @@ void bhv_chuckya_anchor_mario_loop(void);
 void bhv_rotating_platform_loop(void);
 void bhv_battle_box(void);
 void bhv_battle_mario(void);
+void bhv_battle_luigi(void);
 void bhv_battle_bowser(void);
 void bhv_battle_koopa(void);
 void bhv_battle_thwomp(void);
+void bhv_battle_fawful(void);
 void bhv_battle_goomba(void);
 void bhv_wf_breakable_wall_loop(void);
 void bhv_kickable_board_loop(void);
@@ -566,6 +568,7 @@ void bhv_library_door(void);
 void bhv_out_of_bounds(void);
 void bhv_dumpster_loop(void);
 void bhv_field_fawful(void);
+void bhv_fawful_bg(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

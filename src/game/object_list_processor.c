@@ -164,6 +164,12 @@ extern fawful_cutscene;
 u32 fawful_battle;
 extern fawful_battle_won;
 u32 start_dialog;
+extern spared;
+extern killed;
+extern FawfulKilled;
+extern FawfulSpared;
+u32 city_bgm;
+u32 fawful_bonus;
 
 /**
  * Flags controlling what debug info is displayed.
@@ -405,6 +411,14 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
+/*
+print_text_fmt_int(20, 100, "killed %d", killed);
+print_text_fmt_int(20, 115, "spared %d", spared);
+print_text_fmt_int(20, 130, "fawful killed %d", FawfulKilled);
+print_text_fmt_int(20, 145, "fawful spared %d", FawfulSpared);
+*/
+
+
 
     if (gCurrLevelNum == LEVEL_CCM){
         intro_increment = 0;
@@ -495,9 +509,10 @@ if (battle_timer == 120) {
 spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill, 28880, 3286, -31382, 0, 0, 0);
 }
 if (battle_timer == 110) {
-spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);
+spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_BULLET_BILL, bhvBulletBill,28880, 3120, -31382, 0, 0, 0);  
 }
 }
+
 
 
 if (attack_rotation == 5){
@@ -602,6 +617,7 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
         if (death_timer_init == 1){
         level_trigger_warp(gMarioState, WARP_OP_BONFIRE);
         if (death_timer == 29) {
+            
         MarioCurrHp = MarioMaxHp;
         BowserCurrHp = BowserMaxHp;
         LuigiCurrHp = LuigiMaxHp;
@@ -716,7 +732,7 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
     if ((current_turn > 3) && init_timer == 0){
         current_turn == 0;
         dodge_section = 1;
-        battle_timer = 210;
+        battle_timer = 240;
         init_timer = 1;
         vertical_menu = 0;
         vertical_option = 1;
@@ -744,6 +760,7 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
         luigi_action_type = 0;
         dodge_section = 0;
         current_turn = 0;
+        framedelay = 0;
     }
 
     //print_text_fmt_int(20,60, "mario enemy selected %d", mario_enemy_selected);
@@ -831,10 +848,21 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
     enemy_1 = 1;
     enemy_2 = 2; 
     }
+    if (battle_id == 17){
+    enemy_1 = 1;
+    enemy_2 = 1; 
+    }
+    if (battle_id == 18){
+    enemy_1 = 2;
+    enemy_2 = 2; 
+    }
+    if (battle_id == 19){
+    enemy_1 = 2;
+    enemy_2 = 1; 
+    }
     if (battle_id == 100){
     enemy_1 = 4;
     enemy_2 = 0; 
-    fawful_battle = 1;
     }
     if (enemy_1 == 1){
     Enemy1Ratio = enemy_1_health / 2.894;
@@ -855,7 +883,14 @@ if (MarioCurrHp <= 0 && BowserCurrHp <= 0 && LuigiCurrHp <= 0) {
     Enemy2Ratio = enemy_2_health / 4.210;
     }
     if (enemy_1 == 4){
-    Enemy1Ratio = enemy_1_health / 26.315;
+    Enemy1Ratio = enemy_1_max_health / (enemy_1_health / 38);
+    }
+    if (fawful_battle == 1){
+        if (enemy_1_health > 0){
+            enemy_2_health = 1;
+        } else {
+            enemy_2_health = 0;
+        }
     }
 
     //print_text_fmt_int(20,70, "fawful_battle_won %d", fawful_battle_won);
@@ -1092,10 +1127,18 @@ third_speed14++;
         //CurrTP++;
         //}
 
-
+/*
     if (gPlayer1Controller->buttonPressed & L_TRIG){
         enemy_1_health = 0;
+        enemy_2_health = 0;
     }
+            if (gPlayer1Controller->buttonPressed & R_TRIG){
+        enemy_1_mercy = 100;
+        enemy_2_mercy = 100;
+        enemy_1_health = 0;
+        enemy_2_health = 0;
+    }
+    */
     /*
     if (gPlayer1Controller->buttonPressed & R_TRIG){
         MarioCurrHp = 0;
@@ -1104,21 +1147,22 @@ third_speed14++;
         LuigiCurrHp = 0;
     }
     */
-    
-    
+
+
 //print_text_fmt_int(10,0, "enemy_2_health: %d", enemy_2_health);
-//print_text_fmt_int(10,15, "enemy_1_health: %d", enemy_1_health);
+//print_text_fmt_int(10,0, "enemy_1_health: %d", enemy_1_health);
+//print_text_fmt_int(10,15, "enemy_1_max_health: %d", enemy_1_max_health);
 //print_text_fmt_int(10,30, "rpg_initializer: %d", rpg_initializer);
 //print_text_fmt_int(10,45, "rpg_init_timer: %d", rpg_init_timer);
 
-mario_tot_damage = mario_base_damage * mario_multiplier;
+mario_tot_damage = (mario_base_damage * mario_multiplier) + (killed * 2);
  if(bowser_action_selected == 1){
-bowser_tot_damage = (bowser_base_damage * bowser_multiplier) * 2;
+bowser_tot_damage = (((bowser_base_damage * bowser_multiplier) + (killed * 2)) * 2);
  }
 if(bowser_action_selected == 0){
-bowser_tot_damage = bowser_base_damage * bowser_multiplier;
+bowser_tot_damage = (bowser_base_damage * bowser_multiplier)  + (killed * 2);
  }
-luigi_tot_damage = luigi_base_damage * luigi_multiplier;
+luigi_tot_damage = (luigi_base_damage * luigi_multiplier) + (killed * 2);
 
 if (rpg_initializer == 1){
 if (enemy_1 == 1){ // 1 goomba
@@ -1145,9 +1189,10 @@ if (enemy_2 == 3){
         enemy_2_health = 160;
         enemy_2_max_health = 160;
     }
+fawful_bonus = (killed * 25);
 if (enemy_1 == 4){ // 4 fawful
-        enemy_1_health = 1000;
-        enemy_1_max_health = 1000;
+        enemy_1_health = 1000 + fawful_bonus;
+        enemy_1_max_health = 1000 + fawful_bonus;
 }
 }
 if (current_turn == 4){

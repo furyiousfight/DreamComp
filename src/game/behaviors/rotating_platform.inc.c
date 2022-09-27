@@ -33,6 +33,7 @@ s32 FawfulZ;
 extern death_timer;
 s32 fawful_battle_won;
 extern fawful_battle;
+extern killed;
 
 #include "actors/battle_mario/anim_header.h"
 struct WFRotatingPlatformData {
@@ -101,16 +102,16 @@ void bhv_battle_mario(void) {
         obj_set_model(gCurrentObject, MODEL_BATTLE_MARIO);
         if (current_turn == 4){
             if (MarioCurrHp > 0){
-                if ((mario_action_type == 1) && battle_timer > (210 - 29))  {
+                if ((mario_action_type == 1) && battle_timer > (240 - 29))  {
                 cur_obj_init_animation(2);
                 } 
-                if ((mario_action_type == 1) && battle_timer < (210 - 29))  {
+                if ((mario_action_type == 1) && battle_timer < (240 - 29))  {
                 cur_obj_init_animation(0);
                 } 
-                if ((mario_action_type == 2) | (mario_action_type == 3) | (mario_action_type == 4) && battle_timer > (210 - 28))  {
+                if ((mario_action_type == 2) | (mario_action_type == 3) | (mario_action_type == 4) && battle_timer > (240 - 28))  {
                 cur_obj_init_animation(3);
                 } 
-                if ((mario_action_type == 2) | (mario_action_type == 3) | (mario_action_type == 4) && battle_timer < (210 - 28))  {
+                if ((mario_action_type == 2) | (mario_action_type == 3) | (mario_action_type == 4) && battle_timer < (240 - 28))  {
                 cur_obj_init_animation(0);
                 } 
             }
@@ -131,28 +132,28 @@ void bhv_battle_bowser(void) {
         obj_set_model(gCurrentObject, MODEL_BATTLE_DARK_TWOSER);
         if (current_turn == 4){
             if (BowserCurrHp > 0){
-                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer > (210 - 44))  {
+                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer > (240 - 44))  {
                 cur_obj_init_animation(4);
                 } 
-                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer < (210 - 44))  {
+                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer < (240 - 44))  {
                 cur_obj_init_animation(0);
                 } 
-                if ((bowser_action_type == 1) && battle_timer > (210 - 29))  {
+                if ((bowser_action_type == 1) && battle_timer > (240 - 29))  {
                 cur_obj_init_animation(2);
                 } 
-                if ((bowser_action_type == 1) && battle_timer < (210 - 29))  {
+                if ((bowser_action_type == 1) && battle_timer < (240 - 29))  {
                 cur_obj_init_animation(0);
                 } 
-                if ((bowser_action_type == 3) | (bowser_action_type == 4) && battle_timer > (210 - 44))  {
+                if ((bowser_action_type == 3) | (bowser_action_type == 4) && battle_timer > (240 - 44))  {
                 cur_obj_init_animation(4);
                 } 
-                if ((bowser_action_type == 3) | (bowser_action_type == 4) && battle_timer < (210 - 44))  {
+                if ((bowser_action_type == 3) | (bowser_action_type == 4) && battle_timer < (240 - 44))  {
                 cur_obj_init_animation(0);
                 } 
-                if ((bowser_action_type == 2) && battle_timer > (210 - 64))  {
+                if ((bowser_action_type == 2) && battle_timer > (240 - 64))  {
                 cur_obj_init_animation(3);
                 } 
-                if ((bowser_action_type == 2) && battle_timer < (210 - 64))  {
+                if ((bowser_action_type == 2) && battle_timer < (240 - 64))  {
                 cur_obj_init_animation(0);
                 } 
                 
@@ -163,6 +164,50 @@ void bhv_battle_bowser(void) {
                 cur_obj_init_animation(1);
             } else {
         cur_obj_init_animation(0);
+        }
+
+    } else {
+        obj_set_model(gCurrentObject, MODEL_NONE);
+    }
+}
+
+void bhv_battle_luigi(void) {
+    if (RPG_mode == 1){
+        obj_set_model(gCurrentObject, MODEL_GULII);
+        if (current_turn == 4){
+            if (LuigiCurrHp > 0){
+                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer > (240 - 29))  {
+                cur_obj_init_animation(3);
+                } 
+                if ((mario_action_type == 2 && mario_action_selected == 3) && battle_timer < (240 - 29))  {
+                cur_obj_init_animation(4);
+                } 
+                if ((luigi_action_type == 1) && battle_timer > (240 - 29))  {
+                cur_obj_init_animation(2);
+                } 
+                if ((luigi_action_type == 1) && battle_timer < (240 - 29))  {
+                cur_obj_init_animation(4);
+                } 
+                if ((luigi_action_type == 3) | (luigi_action_type == 4) && battle_timer > (240 - 29))  {
+                cur_obj_init_animation(3);
+                } 
+                if ((luigi_action_type == 3) | (luigi_action_type == 4) && battle_timer < (240 - 29))  {
+                cur_obj_init_animation(4);
+                } 
+                if ((luigi_action_type == 2) && battle_timer > (240 - 29))  {
+                cur_obj_init_animation(3);
+                } 
+                if ((luigi_action_type == 2) && battle_timer < (240 - 29))  {
+                cur_obj_init_animation(4);
+                } 
+                
+                
+            }
+            
+        } else if (LuigiCurrHp <= 0){
+                cur_obj_init_animation(5);
+            } else {
+        cur_obj_init_animation(4);
         }
 
     } else {
@@ -191,7 +236,7 @@ void bhv_battle_goomba(void) {
 void bhv_battle_koopa(void) {
         if (RPG_mode == 1){
         if (((o->oBehParams2ndByte == 1) && enemy_1 == 2) | ((o->oBehParams2ndByte == 2) && enemy_2 == 2)){
-            obj_set_model(gCurrentObject, MODEL_KOOPA_WITH_SHELL);
+            obj_set_model(gCurrentObject, MODEL_SUBWAY_KOOPA);
             if ((o->oBehParams2ndByte == 1) && enemy_1_health <= 0){
                 obj_set_model(gCurrentObject, MODEL_NONE);
             }
@@ -214,6 +259,22 @@ void bhv_battle_thwomp(void) {
                 obj_set_model(gCurrentObject, MODEL_NONE);
             }
             if ((o->oBehParams2ndByte == 2) && enemy_2_health <= 0){
+                obj_set_model(gCurrentObject, MODEL_NONE);
+            }
+        }
+
+         else {
+            obj_set_model(gCurrentObject, MODEL_NONE);
+        }
+    }
+}
+
+void bhv_battle_fawful(void) {
+        if (RPG_mode == 1){
+            cur_obj_init_animation(0);
+        if ((o->oBehParams2ndByte == 1) && enemy_1 == 4){
+            obj_set_model(gCurrentObject, MODEL_FAWFUL);
+            if ((o->oBehParams2ndByte == 1) && enemy_1_health <= 0){
                 obj_set_model(gCurrentObject, MODEL_NONE);
             }
         }
@@ -263,6 +324,9 @@ if (obj_check_if_collided_with_object(o, gMarioObject)){
 }
 
 void bhv_whomp_car(void){
+    if (killed >= 14){
+        obj_mark_for_deletion(o);
+    }
     if (o->oBehParams2ndByte == 0){
         if (o->oPosZ >= 7219){
         o->oPosZ -= 8619;
@@ -327,13 +391,13 @@ cur_obj_update_floor_height_and_get_floor();
 
         if (o->oDistanceToMario > 600.0f) {
             cur_obj_set_vel_from_mario_vel(10,1);
-            cur_obj_init_animation(2);
+            cur_obj_init_animation(1);
             
     } else {
         o->oForwardVel -=3;
         if (o->oForwardVel <= 0){
             o->oForwardVel = 0;
-            cur_obj_init_animation(1);
+            cur_obj_init_animation(0);
         }
     }
 }
@@ -413,7 +477,7 @@ cur_obj_init_animation_with_accel_and_sound(0, 2);
 
     }
         if (fawful_cutscene == 1 && fawful_cutscene_timer > 3 && fawful_battle_won == 0){
-spawn_object_abs_with_rot(o, 0, MODEL_TWOSER, bhvFieldFawful, 19905, 337, 1696, 0, 0, 0);
+spawn_object_abs_with_rot(o, 0, MODEL_FAWFUL, bhvFieldFawful, 19905, 337, 1696, 0, 0, 0);
 fawful_cutscene = 2;
     }
 }
@@ -434,7 +498,7 @@ FawfulZ = o->oPosZ;
 //o->oPosY = o->oFloorHeight;
 
     if (o->oForwardVel == 0 ){
-        cur_obj_init_animation(1);
+        cur_obj_init_animation(0);
     }
 
 if (fawful_cutscene == 2 && fawful_cutscene_timer > 10 && fawful_battle_won == 0){
@@ -470,5 +534,12 @@ if (fawful_cutscene == 4 && fawful_battle_won == 0){
     }
 }
 
+void bhv_fawful_bg(void){
+    if (fawful_battle == 1){
+    obj_set_model(gCurrentObject, MODEL_FAWFUL_BG);
+    } else {
+        obj_set_model(gCurrentObject, MODEL_NONE);
+    }
+}
 
 

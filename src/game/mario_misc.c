@@ -42,6 +42,7 @@ extern BowserMaxHp;
 extern LuigiCurrHp;
 extern LuigiMaxHp;
 extern intro_increment;
+extern killed;
 #define TOAD_STAR_1_REQUIREMENT 0
 #define TOAD_STAR_2_REQUIREMENT 0
 #define TOAD_STAR_3_REQUIREMENT 0
@@ -49,10 +50,17 @@ extern intro_increment;
 #define TOAD_STAR_1_DIALOG DIALOG_082
 #define TOAD_STAR_2_DIALOG DIALOG_076
 #define TOAD_STAR_3_DIALOG DIALOG_083
+#define TOAD_STAR_4_DIALOG DIALOG_031
+#define TOAD_STAR_5_DIALOG DIALOG_034
+
 
 #define TOAD_STAR_1_DIALOG_AFTER DIALOG_154
 #define TOAD_STAR_2_DIALOG_AFTER DIALOG_155
 #define TOAD_STAR_3_DIALOG_AFTER DIALOG_156
+#define TOAD_STAR_4_DIALOG_AFTER DIALOG_032
+#define TOAD_STAR_4_DIALOG_AFTER_2 DIALOG_033
+#define TOAD_STAR_5_DIALOG_AFTER DIALOG_035
+#define TOAD_STAR_5_DIALOG_AFTER_2 DIALOG_036
 
 enum ToadMessageStates {
     TOAD_MESSAGE_FADED,
@@ -143,7 +151,7 @@ static void toad_message_talking(void) {
         DIALOG_FLAG_NONE, CUTSCENE_DIALOG, o->oToadMessageDialogId)) {
         o->oToadMessageRecentlyTalked = TRUE;
         o->oToadMessageState = TOAD_MESSAGE_FADING;
-        
+
         switch (o->oToadMessageDialogId) {
             case TOAD_STAR_1_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_1_DIALOG_AFTER;
@@ -157,10 +165,11 @@ static void toad_message_talking(void) {
                 break;
             case TOAD_STAR_3_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_3_DIALOG_AFTER;
-                spawn_object_abs_with_rot(gMarioObject,0, MODEL_DARK_TWOSER, bhvFieldLuigi, 489, 52, 6832, 0, -90, 0);
+                spawn_object_abs_with_rot(gMarioObject,0, MODEL_GULII, bhvFieldLuigi, 489, 52, 6832, 0, -90, 0);
         obj_mark_for_deletion(o);
                 break;
         }
+        
     }
 }
 
@@ -213,11 +222,29 @@ void bhv_toad_message_init(void) {
     s32 enoughStars = TRUE;
 
     switch (dialogId) {
-        case TOAD_STAR_1_DIALOG:
-            enoughStars = (starCount >= TOAD_STAR_1_REQUIREMENT);
-            if (saveFlags & SAVE_FLAG_COLLECTED_TOAD_STAR_1) {
-                dialogId = TOAD_STAR_1_DIALOG_AFTER;
+        case TOAD_STAR_4_DIALOG:
+            if (killed == 0) {
+                dialogId = TOAD_STAR_4_DIALOG;
             }
+            if (killed > 0 && killed < 13) {
+                dialogId = TOAD_STAR_4_DIALOG_AFTER;
+            }
+            if (killed >= 14) {
+                dialogId = TOAD_STAR_4_DIALOG_AFTER_2;
+            }
+            
+            break;
+        case TOAD_STAR_5_DIALOG:
+            if (killed == 0) {
+                dialogId = TOAD_STAR_5_DIALOG;
+            }
+            if (killed > 0 && killed < 13) {
+                dialogId = TOAD_STAR_5_DIALOG_AFTER;
+            }
+            if (killed >= 14) {
+                dialogId = TOAD_STAR_5_DIALOG_AFTER_2;
+            }
+            
             break;
         case TOAD_STAR_2_DIALOG:
             enoughStars = (starCount >= TOAD_STAR_2_REQUIREMENT);
@@ -249,8 +276,12 @@ struct Object *marioObj = m->marioObj;
 if (LastBonfire == 0){
 LastBonfire = 0x0A;
 }
+if (gCurrLevelNum == LEVEL_WF){
+LastLevel = LEVEL_WF;
+}
 if (LastLevel == 0){
 LastLevel = LEVEL_CCM;
+
 }
 if (LastArea == 0){
 LastArea = 1;

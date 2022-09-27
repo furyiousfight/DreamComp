@@ -1,4 +1,5 @@
 extern battle_timer;
+extern battle_id;
 /**
  * Behavior file for bhvSnufit and bhvSnufitBalls.
  * Snufits are present in HMC and CotMC, and are the fly guy
@@ -90,8 +91,14 @@ void snufit_act_idle(void) {
  * Controls the literal shooting action, spawning three bhvSnufitBalls.
  */
 void snufit_act_shoot(void) {
+    if (battle_id != 100){
+    o->oSnufitBodyScalePeriod
+        = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 1000);
+    }
+    if (battle_id == 100){
     o->oSnufitBodyScalePeriod
         = approach_s16_symmetric(o->oSnufitBodyScalePeriod, -0x8000, 3000);
+    }
     o->oSnufitBodyBaseScale
         = approach_s16_symmetric(o->oSnufitBodyBaseScale, 167, 167);
 

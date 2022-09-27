@@ -544,8 +544,10 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvBattleGoomba[];
 extern const BehaviorScript bhvBattleKoopa[];
 extern const BehaviorScript bhvBattleThwomp[];
+extern const BehaviorScript bhvBattleFawful[];
 extern const BehaviorScript bhvBattleBowser[];
 extern const BehaviorScript bhvBattleMario[];
+extern const BehaviorScript bhvBattleLuigi[];
 extern const BehaviorScript bhvBattleBox[];
 extern const BehaviorScript bhvThwompCar[];
 extern const BehaviorScript bhvWhompCar[];
@@ -553,12 +555,14 @@ extern const BehaviorScript bhvFieldBowser[];
 extern const BehaviorScript bhvFieldLuigi[];
 extern const BehaviorScript bhvBonfire[];
 extern const BehaviorScript bhvIntroTalkBowser[];
+extern const BehaviorScript bhvIntroTalkLuigi[];
 extern const BehaviorScript bhvIntroWalkBowser[];
 extern const BehaviorScript bhvBigToad[];
 extern const BehaviorScript bhvLibraryDoor[];
 extern const BehaviorScript bhvOutOfBounds[];
 extern const BehaviorScript bhvDumpster[];
 extern const BehaviorScript bhvFieldFawful[];
+extern const BehaviorScript bhvFawfulBg[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -32,3 +32,7 @@
 #include "whomp_car/geo.inc.c"
 #include "bounds/geo.inc.c"
 #include "dumpster/geo.inc.c"
+#include "subway_koopa/geo.inc.c"
+#include "fawful/geo.inc.c"
+#include "gulii/geo.inc.c"
+#include "fawful_bg/geo.inc.c"

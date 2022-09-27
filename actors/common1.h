@@ -316,4 +316,16 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 #include "dumpster/anim_header.h"
 #include "dumpster/collision_header.h"
 
+#include "subway_koopa/geo_header.h"
+
+#include "fawful/geo_header.h"
+
+
+#include "fawful/anim_header.h"
+#include "gulii/geo_header.h"
+
+
+#include "gulii/anim_header.h"
+#include "fawful_bg/geo_header.h"
+
 #endif

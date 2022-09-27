@@ -146,5 +146,11 @@
     ],
     "2A_custom_theholy": [
         "streamed_audio"
+    ],
+    "2B_custom_darkcity": [
+        "streamed_audio"
+    ],
+    "2C_custom_dontforget": [
+        "streamed_audio"
     ]
 }

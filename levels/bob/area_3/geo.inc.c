@@ -6,6 +6,7 @@ const GeoLayout bob_area_3_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cube_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, bob_dl_Cube_002_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cube_007_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cube_008_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

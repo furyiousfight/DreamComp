@@ -44,7 +44,7 @@ const LevelScript level_main_menu_entry_file_select[] = {
     SLEEP(/*frames*/ 50),
     CLEAR_LEVEL(),
     SLEEP_BEFORE_EXIT(/*frames*/ 1),
-    SET_REG(LEVEL_WF),
+    SET_REG(LEVEL_BOB),
     EXIT_AND_EXECUTE(/*seg*/ SEGMENT_GLOBAL_LEVEL_SCRIPT, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
 };
 

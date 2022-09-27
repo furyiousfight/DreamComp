@@ -36,7 +36,7 @@ extern LuigiMaxHp;
 extern LuigiCurrHp;
 extern menu_pos;
 extern CurrTP;
-char ValueText[10];
+char ValueText[32];
 extern battle_option;
 u32 selection;
 u32 selection_pos = 26;
@@ -71,6 +71,10 @@ extern enemy_1;
 extern enemy_2;
 extern Battle_Won;
 extern fawful_battle;
+extern enemy_1_max_health;
+extern killed;
+extern spared;
+extern fawful_battle;
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -86,7 +90,20 @@ u8 Determined[] = { YOU_FEEL_DETERMINED };
 u8 Test1[] = { TEXT_HUD_TEST_1 };
 u8 Test2[] = { TEXT_HUD_TEST_2 };
 u8 Test3[] = { TEXT_HUD_TEST_3 };
-u8 Test4[] = { TEXT_HUD_TEST_LONG };
+u8 InMyWay[] = { TEXT_HUD_IN_MY_WAY };
+
+u8 Enemy1Flavor1[] = { TEXT_HUD_ENEMY_1_FLAVOR_1 };
+
+u8 Enemy2Flavor1[] = { TEXT_HUD_ENEMY_2_FLAVOR_1 };
+
+u8 Enemy3Flavor1[] = { TEXT_HUD_ENEMY_3_FLAVOR_1 };
+u8 Enemy3Flavor2[] = { TEXT_HUD_ENEMY_3_FLAVOR_2 };
+
+u8 Enemy4Flavor1[] = { TEXT_HUD_ENEMY_4_FLAVOR_1 };
+
+u8 Flavor1[] = { TEXT_HUD_FLAVOR_1 };
+u8 Flavor2[] = { TEXT_HUD_FLAVOR_2 };
+
 u8 Goomba[] = { TEXT_HUD_GOOMBA };
 u8 GoombaCheck1[] = { TEXT_HUD_GOOMBA_CHECK_1 };
 u8 GoombaCheck2[] = { TEXT_HUD_GOOMBA_CHECK_2 };
@@ -145,6 +162,7 @@ u8 Fawful[] = { TEXT_HUD_FAWFUL };
 u8 FawfulAct2[] = { TEXT_HUD_FAWFUL_ACT_2 };
 u8 FawfulAct3[] = { TEXT_HUD_FAWFUL_ACT_3 };
 u8 FawfulCheck1[] = { TEXT_HUD_FAWFUL_CHECK_1 };
+u8 FawfulCheck1000HP[] = { TEXT_HUD_FAWFUL_CHECK_1_1000_HP };
 u8 FawfulCheck2[] = { TEXT_HUD_FAWFUL_CHECK_2 };
 u8 FawfulCheck3[] = { TEXT_HUD_FAWFUL_CHECK_3 };
 
@@ -564,11 +582,47 @@ void render_game(void) {
         print_generic_string(302,65+menu_pos,ValueText);
         if (menu_phase == 0){
             if (checked == 0 && Battle_Won == 0){
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-        print_generic_string(10,selection_pos+menu_pos, TextStar);
-        print_generic_string(25,26+menu_pos,Test1);
-        print_generic_string(25,13+menu_pos,Test2);
-        print_generic_string(25,0+menu_pos,Test3);
+                if (killed >= 14 && fawful_battle == 0){
+                    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                    print_generic_string(10,selection_pos+menu_pos, TextStar);
+                    print_generic_string(25,26+menu_pos,InMyWay);
+                }
+                if (killed < 14 && fawful_battle == 0){
+                    if ((killed + spared) > 1){
+                    if (enemy_1 == 1){
+                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                        print_generic_string(10,selection_pos+menu_pos, TextStar);
+                        print_generic_string(25,26+menu_pos,Enemy1Flavor1);
+
+                    }
+                    if (enemy_1 == 2){
+                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                        print_generic_string(10,selection_pos+menu_pos, TextStar);
+                        print_generic_string(25,26+menu_pos,Enemy2Flavor1);
+
+                    }
+                    if (enemy_1 == 3){
+                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                        print_generic_string(10,selection_pos+menu_pos, TextStar);
+                        print_generic_string(25,26+menu_pos,Enemy3Flavor1);
+                        print_generic_string(25,13+menu_pos,Enemy3Flavor2);
+
+                    }
+                    }
+                    }
+                    if (((killed + spared) == 0 ) && fawful_battle == 0){
+                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                        print_generic_string(10,selection_pos+menu_pos, TextStar);
+                        print_generic_string(25,26+menu_pos,Flavor1);
+                        print_generic_string(25,13+menu_pos,Flavor2);
+                    }
+                
+                    if (enemy_1 == 4 && fawful_battle == 1){
+                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+                        print_generic_string(10,selection_pos+menu_pos, TextStar);
+                        print_generic_string(25,26+menu_pos,Enemy4Flavor1);
+                        
+                }
             }
             if (((checked == 1) && enemy_1 == 1) | ((checked == 2) && enemy_2 == 1)){
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
@@ -594,10 +648,29 @@ void render_game(void) {
         print_generic_string(25,13+menu_pos,ThwompCheck2);
         print_generic_string(25,0+menu_pos,ThwompCheck3);
             }
-            if (((checked == 1) && enemy_1 == 4) | ((checked == 2) && enemy_2 == 4)){
+            if (((checked == 1) && enemy_1 == 4)){
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
         print_generic_string(10,selection_pos+menu_pos, TextStar);
+        
+
+        if (enemy_1_max_health == 1000){
+        print_generic_string(25,26+menu_pos,FawfulCheck1000HP);
+        }
+        if (enemy_1_max_health > 1009 && enemy_1_max_health < 1100){
         print_generic_string(25,26+menu_pos,FawfulCheck1);
+        int_to_str(10,ValueText);
+        print_generic_string(67,26+menu_pos,ValueText);
+        int_to_str((enemy_1_max_health - 1000),ValueText);
+        print_generic_string(81,26+menu_pos,ValueText);
+        }
+        if (enemy_1_max_health > 1099){
+        print_generic_string(25,26+menu_pos,FawfulCheck1);
+        int_to_str(1,ValueText);
+        print_generic_string(67,26+menu_pos,ValueText);
+        int_to_str((enemy_1_max_health - 1000),ValueText);
+        print_generic_string(73,26+menu_pos,ValueText);
+        }
+
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(25,13+menu_pos,FawfulCheck2);
         print_generic_string(25,0+menu_pos,FawfulCheck3);

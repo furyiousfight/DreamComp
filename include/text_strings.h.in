@@ -93,6 +93,21 @@
 #define TEXT_HUD_TEST_2 _("This is the second line")
 #define TEXT_HUD_TEST_3 _("And there's even more text here at the bottom")
 
+#define TEXT_HUD_IN_MY_WAY _("In my way.")
+
+#define TEXT_HUD_ENEMY_1_FLAVOR_1 _("A smoochable enemy blocks the way!")
+
+#define TEXT_HUD_ENEMY_2_FLAVOR_1 _("Hi welcome to subway.")
+
+#define TEXT_HUD_ENEMY_3_FLAVOR_1 _("Ever wonder how they build a thwomp car?")
+#define TEXT_HUD_ENEMY_3_FLAVOR_2 _("They start with Mayan Tires.")
+
+#define TEXT_HUD_ENEMY_4_FLAVOR_1 _("Chortles echo through the vacinity.")
+
+#define TEXT_HUD_FLAVOR_1 _("What's this? A fully functional battle system?")
+#define TEXT_HUD_FLAVOR_2 _("Made entirely within Super Mario 64?")
+
+
 #define TEXT_HUD_GOOMBA _("Floomba")
 #define TEXT_HUD_GOOMBA_CHECK_1 _("Floomba - 110 HP")
 
@@ -123,7 +138,8 @@
 
 #define TEXT_HUD_FAWFUL _("Fawful")
 
-#define TEXT_HUD_FAWFUL_CHECK_1 _("Fawful - 1000 HP")
+#define TEXT_HUD_FAWFUL_CHECK_1         _("Fawful -      HP")
+#define TEXT_HUD_FAWFUL_CHECK_1_1000_HP _("Fawful - 1000 HP")
 #define TEXT_HUD_FAWFUL_CHECK_2 _("The cause of all this trouble.")
 #define TEXT_HUD_FAWFUL_CHECK_3 _("Get him!")
 

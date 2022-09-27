@@ -56,6 +56,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_DARK_TWOSER, dark_twoser_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_DUMPSTER, dumpster_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BATTLE_DARK_TWOSER, battle_dark_twoser_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GULII, gulii_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -66,8 +67,8 @@ const LevelScript level_ddd_entry[] = {
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_ENDING, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -1, 100, -1976, 0, 0, 0, 0x150B0000, bhvWarp),
-		OBJECT(MODEL_DARK_TWOSER, 259, 100, -1298, 0, -152, 0, 0x10000000, bhvIntroTalkBowser),
-		OBJECT(MODEL_DARK_TWOSER, -303, 100, -341, 0, 17, 0, 0x0F000000, bhvIntroTalkBowser),
+		OBJECT(MODEL_DARK_TWOSER, 259, 100, -1298, 0, -152, 0, 0x22000000, bhvIntroTalkBowser),
+		OBJECT(MODEL_GULII, -303, 100, -341, 0, 17, 0, 0x1F000000, bhvIntroTalkLuigi),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, 0, 0, 200, 0),
 		TERRAIN(ddd_area_1_collision),

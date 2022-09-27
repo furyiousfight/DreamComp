@@ -8,7 +8,7 @@ extern u8 ccm_dl_dark_world_edge_corner_ci4[];
 extern u8 ccm_dl_dark_world_edge_corner_ci4_pal_rgba16[];
 extern u8 ccm_dl_dark_world_edge_ci4[];
 extern u8 ccm_dl_dark_world_edge_ci4_pal_rgba16[];
-extern Vtx ccm_dl_Cube_mesh_layer_1_vtx_0[1584];
+extern Vtx ccm_dl_Cube_mesh_layer_1_vtx_0[1586];
 extern Gfx ccm_dl_Cube_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_Cube_mesh_layer_1_vtx_1[356];
 extern Gfx ccm_dl_Cube_mesh_layer_1_tri_1[];

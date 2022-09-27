@@ -58,6 +58,16 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "2A_custom_theholy"
+        },
+        "inst8": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "2B_custom_darkcity"
+        },
+        "inst9": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "2C_custom_dontforget"
         }
     },
     "instrument_list": [
@@ -68,6 +78,8 @@
         "inst4",
         "inst5",
         "inst6",
-        "inst7"
+        "inst7",
+        "inst8",
+        "inst9"
     ]
 }

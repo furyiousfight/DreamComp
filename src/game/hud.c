@@ -81,6 +81,7 @@ extern SpareRatio;
 u32 target_debug;
 s32 TargetX = 0;
 s32 TargetY = 0;
+extern enemy_2;
 
 
 
@@ -711,7 +712,7 @@ if (menu_phase == 1){
     Enemy1MercyMove[12].v.ob[0] = Enemy1MinMercyPos + enemy_1_spare;
     Enemy1MercyMove[15].v.ob[0] = Enemy1MinMercyPos + enemy_1_spare;
 }
-    if (enemy_2_health > 0){
+    if (enemy_2_health > 0 && enemy_2 != 0){
     create_dl_translation_matrix(G_MTX_PUSH, 0, -13, 0);
     gSPDisplayList(gDisplayListHead++, &Enemy2_Bars_Enemy__Bars_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);

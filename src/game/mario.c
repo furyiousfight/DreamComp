@@ -41,6 +41,7 @@ extern HealthCycleTimer;
 extern mario_action_type;
 extern bowser_action_type;
 extern luigi_action_type;
+extern killed;
 /**************************************************
  *                    ANIMATIONS                  *
  **************************************************/
@@ -1459,14 +1460,14 @@ void update_mario_health(struct MarioState *m) {
         if (HealthCycleTimer == 0){
             if(mario_action_type != 5){
                 if (m->hurtCounter > 0) {
-                    MarioCurrHp -= 15;
+                    MarioCurrHp -= 15 + (killed / 2);
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(mario_action_type == 5){
                 if (m->hurtCounter > 0) {
-                    MarioCurrHp -= 10;
+                    MarioCurrHp -= 10 + (killed / 3) ;
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
@@ -1475,14 +1476,14 @@ void update_mario_health(struct MarioState *m) {
         if (HealthCycleTimer == 1){
             if(bowser_action_type != 5){
                 if (m->hurtCounter > 0) {
-                    BowserCurrHp -= 15;
+                    BowserCurrHp -= 15 + (killed / 2);
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(bowser_action_type == 5){
                 if (m->hurtCounter > 0) {
-                    BowserCurrHp -= 10;
+                    BowserCurrHp -= 10 + (killed / 3);
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
@@ -1491,14 +1492,14 @@ void update_mario_health(struct MarioState *m) {
         if (HealthCycleTimer == 2){
         if(luigi_action_type != 5){
                 if (m->hurtCounter > 0) {
-                    LuigiCurrHp -= 15;
+                    LuigiCurrHp -= 15 + (killed / 2);
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }
             }
             if(luigi_action_type == 5){
                 if (m->hurtCounter > 0) {
-                    LuigiCurrHp -= 10;
+                    LuigiCurrHp -= 10 + (killed / 3);
                     m->hurtCounter--;
                     play_sound(SOUND_OBJ_CANNON_TURN, gGlobalSoundSource);
                 }

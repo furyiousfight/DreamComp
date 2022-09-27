@@ -37,7 +37,12 @@ void bullet_bill_act_2(void) {
         }
 
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
+        if (battle_id != 100){
+        o->oForwardVel = 25.0f;
+        }
+        if (battle_id == 100){
         o->oForwardVel = 40.0f;
+        }
 
 
 

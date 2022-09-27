@@ -558,6 +558,10 @@
 #define MODEL_DARK_TWOSER                     0xF0        // bowser2_geo
 #define MODEL_DUMPSTER                     0xF1        // bowser2_geo
 #define MODEL_BATTLE_DARK_TWOSER                    0xF2        // bowser2_geo
+#define MODEL_SUBWAY_KOOPA                   0xF3        // bowser2_geo
+#define MODEL_FAWFUL                      0xF4        // bowser2_geo
+#define MODEL_GULII                       0xF5        // bowser2_geo
+#define MODEL_FAWFUL_BG                0xF6        // bowser2_geo
 #ifdef IA8_30FPS_COINS
 #define MODEL_SILVER_COIN                 0xE2        // silver_coin_geo
 #define MODEL_SILVER_COIN_NO_SHADOW       0xE3        // silver_coin_no_shadow_geo

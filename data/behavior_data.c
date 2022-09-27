@@ -6129,6 +6129,19 @@ BEGIN(OBJ_LIST_DEFAULT),
         CALL_NATIVE(bhv_battle_thwomp),
     END_LOOP(),
 };
+const BehaviorScript bhvBattleFawful[] = {
+BEGIN(OBJ_LIST_DEFAULT),
+
+    LOAD_ANIMATIONS(oAnimations, fawful_anims),
+    SET_FLOAT(oDrawingDistance, 32000),
+    ANIMATE(1),
+
+    SCALE(/*Unused*/ 0, /*Field*/ 40),
+    CALL_NATIVE(bhv_toad_message_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_battle_fawful),
+    END_LOOP(),
+};
 
 const BehaviorScript bhvBattleBowser[] = {
 BEGIN(OBJ_LIST_DEFAULT),
@@ -6155,6 +6168,20 @@ BEGIN(OBJ_LIST_DEFAULT),
     CALL_NATIVE(bhv_toad_message_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_battle_mario),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBattleLuigi[] = {
+BEGIN(OBJ_LIST_DEFAULT),
+
+    LOAD_ANIMATIONS(oAnimations, gulii_anims),
+    SET_FLOAT(oDrawingDistance, 32000),
+    ANIMATE(4),
+
+    SCALE(/*Unused*/ 0, /*Field*/ 135),
+    CALL_NATIVE(bhv_toad_message_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_battle_luigi),
     END_LOOP(),
 };
 
@@ -6217,7 +6244,7 @@ SCALE(/*Unused*/ 0, /*Field*/ 70),
 const BehaviorScript bhvFieldLuigi[] = {
 
     BEGIN(OBJ_LIST_GENACTOR),
-    LOAD_ANIMATIONS(oAnimations, twoser_anims),
+    LOAD_ANIMATIONS(oAnimations, gulii_anims),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     ANIMATE(0),
@@ -6225,7 +6252,7 @@ const BehaviorScript bhvFieldLuigi[] = {
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_INT(oDamageOrCoinValue, 3),
         DROP_TO_FLOOR(),
-SCALE(/*Unused*/ 0, /*Field*/ 70),
+SCALE(/*Unused*/ 0, /*Field*/ 30),
     SET_INT(oIntangibleTimer, 0),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
 
@@ -6256,6 +6283,23 @@ BEGIN(OBJ_LIST_GENACTOR),
     SET_HITBOX(/*Radius*/ 120, /*Height*/ 300),
     SET_INT(oIntangibleTimer, 0),
     SCALE(/*Unused*/ 0, /*Field*/ 70),
+
+    CALL_NATIVE(bhv_toad_message_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_toad_message_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvIntroTalkLuigi[] = {
+
+BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, gulii_anims),
+    ANIMATE(0),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_HITBOX(/*Radius*/ 40, /*Height*/ 170),
+    SET_INT(oIntangibleTimer, 0),
+    SCALE(/*Unused*/ 0, /*Field*/ 30),
 
     CALL_NATIVE(bhv_toad_message_init),
     BEGIN_LOOP(),
@@ -6340,17 +6384,30 @@ const BehaviorScript bhvFieldFawful[] = {
 BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    LOAD_ANIMATIONS(oAnimations, twoser_anims),
+    LOAD_ANIMATIONS(oAnimations, fawful_anims),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
     ANIMATE(0),
+
     SET_INTERACT_TYPE(INTERACT_TEXT),
 DROP_TO_FLOOR(),
 
-SCALE(/*Unused*/ 0, /*Field*/ 40),
+SCALE(/*Unused*/ 0, /*Field*/ 10),
     SET_INT(oIntangibleTimer, 0),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
 
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_field_fawful),
     END_LOOP(),
+};
+
+const BehaviorScript bhvFawfulBg[] = {
+BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+
+
+    BEGIN_LOOP(),
+
+        CALL_NATIVE(bhv_fawful_bg),
+    END_LOOP(),
+    BREAK(),
 };
