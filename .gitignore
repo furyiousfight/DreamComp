@@ -625,7 +625,7 @@ levels/ddd/1.rgba16.png
 levels/ddd/2.rgba16.png
 levels/ddd/3.rgba16.png
 levels/ddd/4.rgba16.png
-levels/ending/cake.png
+
 levels/ending/cake_eu.png
 levels/ending/eu_023000.rgba16.png
 levels/ending/eu_024000.rgba16.png
@@ -1060,7 +1060,7 @@ sound/samples/piranha_music_box/00_music_box.aiff
 sound/samples/sfx_1/00_twirl.aiff
 sound/samples/sfx_1/01_brushing.aiff
 sound/samples/sfx_1/02_hand_touch.aiff
-sound/samples/sfx_1/03_yoshi.aiff
+
 sound/samples/sfx_1/04_plop.aiff
 sound/samples/sfx_1/05_heavy_landing.aiff
 sound/samples/sfx_4/00.aiff
@@ -1084,16 +1084,15 @@ sound/samples/sfx_5/07.aiff
 sound/samples/sfx_5/08.aiff
 sound/samples/sfx_5/09.aiff
 sound/samples/sfx_5/0A.aiff
-sound/samples/sfx_5/0B.aiff
-sound/samples/sfx_5/0C.aiff
+
 sound/samples/sfx_5/0D.aiff
 sound/samples/sfx_5/0E.aiff
-sound/samples/sfx_5/0F.aiff
+
 sound/samples/sfx_5/10.aiff
 sound/samples/sfx_5/11.aiff
 sound/samples/sfx_5/12.aiff
 sound/samples/sfx_5/13.aiff
-sound/samples/sfx_5/14.aiff
+
 sound/samples/sfx_5/15.aiff
 sound/samples/sfx_5/16.aiff
 sound/samples/sfx_5/17.aiff
@@ -1111,8 +1110,8 @@ sound/samples/sfx_6/05.aiff
 sound/samples/sfx_6/06.aiff
 sound/samples/sfx_6/07.aiff
 sound/samples/sfx_6/08.aiff
-sound/samples/sfx_6/09.aiff
-sound/samples/sfx_6/0A.aiff
+
+
 sound/samples/sfx_6/0B.aiff
 sound/samples/sfx_6/0C.aiff
 sound/samples/sfx_6/0D.aiff
@@ -1122,7 +1121,7 @@ sound/samples/sfx_7/02.aiff
 sound/samples/sfx_7/03.aiff
 sound/samples/sfx_7/04.aiff
 sound/samples/sfx_7/05.aiff
-sound/samples/sfx_7/06.aiff
+
 sound/samples/sfx_7/07.aiff
 sound/samples/sfx_7/08.aiff
 sound/samples/sfx_7/09.aiff
